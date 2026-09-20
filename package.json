@@ -1,0 +1,32 @@
+{
+  "name": "global-concierge-bots",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "node --test tests/*.test.js",
+    "format": "prettier --write src tests index.html README.md",
+    "dev:ui": "vite --host 127.0.0.1",
+    "server": "node server/index.js"
+  },
+  "dependencies": {
+    "lucide-react": "^1.47.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.8",
+    "vite": "^7.1.0"
+  },
+  "description": "Parametric Three.js robot rigs, actions, expressions and effects",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "exports": {
+    "./bots": "./src/bots/index.js"
+  }
+}

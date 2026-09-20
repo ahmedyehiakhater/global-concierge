@@ -1,0 +1,37 @@
+[
+  {
+    "path": "modify_booking_expanded_workspace_with_summary_panel/code.html",
+    "active": "bookings",
+    "body_text_preserved": true
+  },
+  {
+    "path": "financials_insights_dashboard_optimized/code.html",
+    "active": "financials",
+    "body_text_preserved": true
+  },
+  {
+    "path": "booking_confirmation_desktop_updated_navigation/code.html",
+    "active": "bookings",
+    "body_text_preserved": true
+  },
+  {
+    "path": "agent_dashboard/code.html",
+    "active": "dashboard",
+    "body_text_preserved": true
+  },
+  {
+    "path": "all_bookings_management/code.html",
+    "active": "bookings",
+    "body_text_preserved": true
+  },
+  {
+    "path": "booking_details_desktop/code.html",
+    "active": "bookings",
+    "body_text_preserved": true
+  },
+  {
+    "path": "cancel_booking_refund_summary/code.html",
+    "active": "bookings",
+    "body_text_preserved": true
+  }
+]

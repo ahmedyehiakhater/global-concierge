@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Global Concierge · Bot Studio</title>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <a href="#" class="brand">GLOBAL CONCIERGE <span>BOT STUDIO</span></a
+        ><span class="edition">PROCEDURAL ROBOT SYSTEM / 01</span>
+      </header>
+      <main>
+        <section class="stage">
+          <div class="intro">
+            <span class="eyebrow">FIVE PERSONALITIES. ONE SYSTEM.</span>
+            <h1>A little more alive.</h1>
+            <p>Rigid parts. Expressive motion. Ready for your world.</p>
+          </div>
+          <div id="viewport" aria-label="Five interactive 3D robots"></div>
+          <div class="bot-picker" id="bots" aria-label="Choose a bot"></div>
+          <div class="stage-note">
+            Fixed orthographic view <span>•</span> +Z forward <span>•</span> All
+            geometry built in code
+          </div>
+        </section>
+        <aside>
+          <div class="selected">
+            <div>
+              <span class="eyebrow">SELECTED BOT</span>
+              <h2 id="name">Priya</h2>
+            </div>
+            <span class="badge" id="personality"></span>
+          </div>
+          <div class="status"><i></i><span id="state">Idle</span></div>
+          <div class="section-heading">
+            Motion <label>Speed <output id="speedValue">1.0×</output></label>
+          </div>
+          <input
+            aria-label="Walking speed multiplier"
+            id="speed"
+            type="range"
+            min="0.5"
+            max="1.8"
+            step="0.1"
+            value="1"
+          />
+          <div class="actions" id="actions"></div>
+          <div class="transport">
+            <button id="stop">Finish loop</button
+            ><button id="cancel">Cancel action</button>
+          </div>
+          <div class="section-heading">
+            Screen <span>Independent of motion</span>
+          </div>
+          <div class="expressions" id="expressions"></div>
+          <div class="status-controls">
+            <select id="graphic" aria-label="Screen status graphic">
+              <option value="">Expression</option>
+              <option value="progress">Progress bar</option>
+              <option value="loading">Loading spinner</option>
+              <option value="cross">Red cross</option>
+              <option value="tick">Green tick</option></select
+            ><input
+              aria-label="Progress percentage"
+              id="progress"
+              type="range"
+              min="0"
+              max="100"
+              value="65"
+            />
+          </div>
+          <div class="section-heading">
+            Effects <span>At selected bot</span>
+          </div>
+          <div class="effects" id="effects"></div>
+          <button class="sequence" id="sequence">
+            Run two-bot sequence <span>↗</span>
+          </button>
+          <div id="message" role="status">
+            Choose a bot, then try an action.
+          </div>
+          <div class="log" id="log" aria-label="Action completion events"></div>
+        </aside>
+      </main>
+      <footer>
+        BOT SYSTEM SANDBOX
+        <span>No application choreography inside the module.</span
+        ><button id="reset">Reset all</button>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Booking Confirmation - dnata B2B</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&display=block"><link rel="stylesheet" href="../shared/reference.css"><script src="https://cdn.tailwindcss.com/3.4.17?plugins=forms,container-queries"></script><script src="../shared/tailwind.config.js"></script></head><body>
+<header class="portal-header" aria-label="Global navigation">
+<a class="dnata-wordmark" href="../agent_dashboard/code.html" aria-label="dnata Agent Portal home"><img class="dnata-logo" src="../shared/dnata-logo.svg" alt="dnata" width="120" height="33"></a>
+<label class="portal-search"><span class="material-symbols-outlined" aria-hidden="true">search</span><input type="search" aria-label="Search bookings and references" placeholder="Search bookings, references..."></label>
+<div class="portal-header-actions"><a class="portal-new-booking" href="../booking_single_journey/code.html"><span class="material-symbols-outlined" aria-hidden="true">add</span>New Booking</a><button type="button" class="portal-icon" aria-label="Notifications"><span class="material-symbols-outlined" aria-hidden="true">notifications</span></button><button type="button" class="portal-icon" aria-label="Settings"><span class="material-symbols-outlined" aria-hidden="true">settings</span></button><button type="button" class="portal-avatar" aria-label="Sarah's profile">SJ</button></div>
+</header>
+<aside class="portal-sidebar" aria-label="Sidebar"><div class="portal-workspace"><span class="portal-eyebrow">Agent Portal</span><strong>Global Travel Partners</strong><span>Premium Concierge</span></div><nav class="portal-nav" aria-label="Primary navigation"><a class="portal-nav-item" data-nav="dashboard" href="../agent_dashboard/code.html"><span class="material-symbols-outlined" aria-hidden="true">dashboard</span><span>Dashboard</span></a>
+<a class="portal-nav-item" data-nav="marketplace" aria-disabled="true" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">storefront</span><span>Marketplace</span></a>
+<a class="portal-nav-item" data-nav="bookings" href="../all_bookings_management/code.html" aria-current="page"><span class="material-symbols-outlined" aria-hidden="true">event_available</span><span>Bookings</span></a>
+<a class="portal-nav-item" data-nav="financials" href="../financials_insights_dashboard_optimized/code.html"><span class="material-symbols-outlined" aria-hidden="true">account_balance_wallet</span><span>Financials</span></a>
+<a class="portal-nav-item" data-nav="clients" aria-disabled="true" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">group</span><span>Clients</span></a>
+<a class="portal-nav-item" data-nav="reports" aria-disabled="true" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">analytics</span><span>Reports</span></a>
+<a class="portal-nav-item" data-nav="corporate" aria-disabled="true" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">business</span><span>Corporate Accounts</span></a>
+<a class="portal-nav-item" data-nav="tools" aria-disabled="true" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">construction</span><span>Agent Tools</span></a>
+</nav><button type="button" class="portal-support"><span class="material-symbols-outlined" aria-hidden="true">support_agent</span>Support Center</button></aside>
+<div class="reference-content"><main class="flex-grow w-full reference-main" id="main-content">
+<!-- Success Header Section -->
+<div class="mb-10 text-center flex flex-col items-center">
+<div class="w-20 h-20 rounded-full bg-surface-container-low flex items-center justify-center mb-6 shadow-card">
+<span class="material-symbols-outlined text-[40px] text-primary" data-icon="check_circle">check_circle</span>
+</div>
+<h1 class="font-display-lg text-display-lg mb-2">Booking Confirmed!</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-6">Your booking has been successfully processed.</p>
+<div class="inline-flex items-center gap-3 bg-surface shadow-card px-6 py-3 rounded-xl border border-outline-variant">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Booking Reference</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">MB-2024-8892</span>
+<button class="text-on-surface-variant hover:text-primary p-1 ml-2 transition-colors rounded" title="Copy to clipboard" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Two Column Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Booking Summary -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<div class="bg-surface shadow-card rounded-xl border border-outline-variant overflow-hidden relative">
+<div class="absolute top-0 left-0 w-full h-1 bg-primary"></div>
+<div class="p-6 border-b border-surface-variant flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="receipt_long">receipt_long</span>
+                            Booking Summary
+                        </h2>
+<span class="bg-surface-container px-3 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">circle</span>
+                            Confirmed
+                        </span>
+</div>
+<div class="p-6 flex flex-col gap-8">
+<!-- Flight Details -->
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="flight_land">flight_land</span>
+                                Flight Details
+                            </h3>
+<div class="bg-surface-container-low p-4 rounded-lg flex items-center justify-between border border-surface-variant">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface rounded-full flex items-center justify-center shadow-sm text-primary font-bold font-headline-md text-headline-md">
+                                        EK
+                                    </div>
+<div>
+<p class="font-headline-md text-headline-md font-bold">EK 408</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Arrival</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-md text-body-md font-semibold">24 Oct 2024</p>
+<p class="font-body-md text-body-md text-on-surface-variant">08:45 AM (Local Time)</p>
+</div>
+</div>
+</div>
+<hr class="border-surface-variant"/>
+<!-- Guest Details -->
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="group">group</span>
+                                Guest Information
+                            </h3>
+<ul class="flex flex-col gap-3">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline" data-icon="person">person</span>
+<span class="font-body-md text-body-md font-medium">John Doe</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline" data-icon="person">person</span>
+<span class="font-body-md text-body-md font-medium">Jane Smith</span>
+</li>
+</ul>
+</div>
+<hr class="border-surface-variant"/>
+<!-- Services -->
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="room_service">room_service</span>
+                                Selected Services
+                            </h3>
+<div class="flex items-start gap-4 p-4 border border-outline-variant rounded-lg bg-surface relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 text-primary mt-1">
+<span class="material-symbols-outlined" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg font-semibold">Elite Meet &amp; Greet</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Premium arrival assistance, fast-track immigration, and porter service.</p>
+</div>
+</div>
+</div>
+<hr class="border-surface-variant"/><div><h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[18px]" data-icon="policy">policy</span>Modification &amp; Cancellation Policy</h3><div class="bg-surface-container-low p-4 rounded-lg border border-surface-variant"><p class="font-body-md text-body-md text-on-surface-variant"><span class="font-semibold text-on-surface">Free changes or cancellations</span> until 6 hours before the service. No refunds for modifications or cancellations made within 6 hours of the service time.</p></div></div></div>
+</div>
+</div>
+<!-- Right Column: Payment & Account Details -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<div class="bg-surface shadow-card rounded-xl border border-outline-variant overflow-hidden">
+<div class="p-6 border-b border-surface-variant">
+<h2 class="font-headline-md text-headline-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="account_balance_wallet">account_balance_wallet</span>
+                            Credit Facility Details
+                        </h2>
+</div>
+<div class="p-6 flex flex-col gap-6">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Corporate Account</p>
+<p class="font-body-md text-body-md font-medium">Global Travel Partners LLC</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Charged to</p>
+<div class="flex items-center gap-2 font-body-md text-body-md font-medium">
+<span class="material-symbols-outlined text-[20px] text-outline" data-icon="receipt">receipt</span>
+                                Corporate Credit Facility
+                            </div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg mt-2 border border-surface-variant">
+<div class="flex justify-between items-center mb-2">
+<span class="font-body-md text-body-md text-on-surface-variant">Subtotal</span>
+<span class="font-body-md text-body-md">AED 637.50</span>
+</div>
+<div class="flex justify-between items-center mb-4">
+<span class="font-body-md text-body-md text-on-surface-variant">VAT (5%)</span>
+<span class="font-body-md text-body-md">AED 31.88</span>
+</div>
+<div class="border-t border-outline-variant pt-4 flex justify-between items-center">
+<span class="font-body-lg text-body-lg font-bold">Credit Deducted</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">AED 669.38</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-3 mt-4">
+<button class="w-full flex items-center justify-center gap-2 bg-primary-container text-on-primary-container font-label-md text-label-md px-6 py-4 rounded-lg shadow-card hover:opacity-90 transition-opacity primary-action" type="button">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                        Download PDF Receipt
+                    </button>
+<button class="w-full flex items-center justify-center gap-2 bg-surface border border-outline-variant text-on-surface font-label-md text-label-md px-6 py-4 rounded-lg hover:bg-surface-container-low transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined" data-icon="print">print</span>
+                        Print Summary
+                    </button>
+<button class="w-full flex items-center justify-center gap-2 bg-transparent text-primary font-label-md text-label-md px-6 py-3 rounded-lg hover:underline transition-all mt-2" type="button">
+                        Back to Dashboard
+                    </button>
+</div>
+</div>
+</div>
+</main><footer class="bg-surface-container-low w-full border-t border-outline-variant mt-auto">
+<div class="w-full px-margin-desktop py-12 max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<span class="text-headline-md font-headline-md text-primary font-bold">dnata B2B</span>
+<div class="flex flex-wrap gap-6 items-center font-label-md text-label-md text-on-surface-variant">
+<a class="hover:text-primary transition-colors underline" href="#">Support Center</a>
+<a class="hover:text-primary transition-colors underline" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors underline" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors underline" href="#">Corporate Info</a>
+<a class="hover:text-primary transition-colors underline" href="#">Contact Us</a>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">© 2024 dnata Services. All rights reserved.</span>
+</div>
+</footer></div>
+
+</body></html>

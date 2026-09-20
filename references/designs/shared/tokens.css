@@ -1,0 +1,26 @@
+/* The only palette definition. All screens, charts and utilities reference this block. */
+:root {
+ --brand-primary: #0285CA;
+ --brand-action: #78BE21;
+ --surface: #f7f8f8;
+ --surface-raised: #ffffff;
+ --surface-muted: #f0f3f5;
+ --surface-strong: #e5eaee;
+ --text-primary: #202c35;
+ --text-muted: #5b6973;
+ --text-inverse: #ffffff;
+ --action-ink: #172a08;
+ --border: #dbe2e7;
+ --success: #25663d;
+ --success-subtle: #eaf5ed;
+ --success-border: #b9dcc2;
+ --warning: #865b16;
+ --warning-subtle: #fff4dd;
+ --error: #b42332;
+ --error-subtle: #fff0f1;
+ --error-border: #f1c4ca;
+ --brand-subtle: color-mix(in srgb, var(--brand-primary) 9%, var(--surface-raised));
+ --chart-fill: color-mix(in srgb, var(--brand-primary) 10%, transparent);
+ --shadow: color-mix(in srgb, var(--text-primary) 6%, transparent);
+ --glass: color-mix(in srgb, var(--surface-raised) 80%, transparent);
+}

@@ -1,0 +1,19 @@
+{
+  "booking_details_desktop": {
+    "Payment Summary": "Credit Charge Summary",
+    "Billed to Corporate Monthly Account": "Charged to Corporate Credit Facility"
+  },
+  "booking_confirmation_desktop_updated_navigation": {
+    "Payment Details": "Credit Facility Details",
+    "Payment Method": "Charged to",
+    "Monthly Billing": "Corporate Credit Facility",
+    "Net Payable": "Credit Deducted"
+  },
+  "cancel_booking_refund_summary": {
+    "Original Payment Method (Corporate Account)": "Corporate Credit Facility",
+    "Funds will be credited back to your corporate balance immediately.": "Eligible refunds restore available credit after the cancellation is processed."
+  },
+  "modify_booking_expanded_workspace_with_summary_panel": {
+    "Balance Due": "Additional Credit Deduction"
+  }
+}

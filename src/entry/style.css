@@ -1,0 +1,151 @@
+@import "../../references/designs/shared/tokens.css";
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: Inter, Arial, sans-serif;
+  background: var(--surface-raised);
+  color: var(--text-primary);
+}
+#stage {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+}
+canvas {
+  display: block;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+}
+button:focus-visible {
+  outline: 3px solid var(--brand-primary);
+  outline-offset: 4px;
+}
+.utility {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 30;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: var(--surface-raised);
+  color: var(--text-muted);
+  padding: 10px 17px;
+  font-size: 12px;
+}
+.utility:hover {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+}
+.start {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 0;
+  border-radius: 14px;
+  padding: 16px 24px;
+  background: var(--brand-action);
+  color: var(--action-ink);
+  font-weight: 700;
+  white-space: nowrap;
+}
+#hint {
+  position: fixed;
+  bottom: 24px;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+#fallback {
+  position: absolute;
+  top: 40%;
+  padding: 32px;
+  width: 100%;
+  text-align: center;
+}
+#stage .gc-bubble {
+  width: 310px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 10px 35px var(--shadow);
+  color: var(--text-primary);
+  font:
+    15px/1.5 Inter,
+    Arial,
+    sans-serif;
+}
+#stage .gc-speaker {
+  color: var(--brand-primary);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+#stage .gc-text {
+  margin: 10px 0 16px;
+  font-size: 17px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+#stage .gc-choices {
+  display: grid;
+  gap: 8px;
+  margin-top: 0;
+}
+#stage .gc-choice {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-primary);
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  transition:
+    transform 0.12s,
+    background 0.12s;
+}
+#stage .gc-choice:first-child {
+  background: var(--brand-action);
+  border-color: var(--brand-action);
+  color: var(--action-ink);
+  font-weight: 700;
+}
+#stage .gc-choice:hover {
+  background: var(--brand-subtle);
+  border-color: var(--brand-primary);
+}
+#stage .gc-choice:active {
+  transform: scale(0.97);
+}
+#stage .gc-close {
+  color: var(--text-muted);
+}
+[hidden] {
+  display: none !important;
+}
+@media (max-height: 600px) {
+  #stage .gc-bubble {
+    padding: 14px;
+    width: 285px;
+  }
+  #stage .gc-text {
+    font-size: 15px;
+    margin: 6px 0 10px;
+  }
+  #stage .gc-choice {
+    padding: 7px 10px;
+  }
+  .utility {
+    top: 12px;
+    right: 12px;
+  }
+}

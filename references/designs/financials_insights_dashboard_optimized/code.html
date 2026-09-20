@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Financials & Insights - dnata</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&display=block"><link rel="stylesheet" href="../shared/reference.css"><script src="https://cdn.tailwindcss.com/3.4.17?plugins=forms,container-queries"></script><script src="../shared/tailwind.config.js"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script></head><body>
+<header class="portal-header" aria-label="Global navigation">
+<a class="dnata-wordmark" href="../agent_dashboard/code.html" aria-label="dnata Agent Portal home"><img class="dnata-logo" src="../shared/dnata-logo.svg" alt="dnata" width="120" height="33"></a>
+<label class="portal-search"><span class="material-symbols-outlined" aria-hidden="true">search</span><input type="search" aria-label="Search bookings and references" placeholder="Search bookings, references..."></label>
+<div class="portal-header-actions"><a class="portal-new-booking" href="../booking_single_journey/code.html"><span class="material-symbols-outlined" aria-hidden="true">add</span>New Booking</a><button type="button" class="portal-icon" aria-label="Notifications"><span class="material-symbols-outlined" aria-hidden="true">notifications</span></button><button type="button" class="portal-icon" aria-label="Settings"><span class="material-symbols-outlined" aria-hidden="true">settings</span></button><button type="button" class="portal-avatar" aria-label="Sarah's profile">SJ</button></div>
+</header>
+<aside class="portal-sidebar" aria-label="Sidebar"><div class="portal-workspace"><span class="portal-eyebrow">Agent Portal</span><strong>Global Travel Partners</strong><span>Premium Concierge</span></div><nav class="portal-nav" aria-label="Primary navigation"><a class="portal-nav-item" data-nav="dashboard" href="../agent_dashboard/code.html"><span class="material-symbols-outlined" aria-hidden="true">dashboard</span><span>Dashboard</span></a>
+<a class="portal-nav-item" data-nav="marketplace" aria-disabled="true" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">storefront</span><span>Marketplace</span></a>
+<a class="portal-nav-item" data-nav="bookings" href="../all_bookings_management/code.html"><span class="material-symbols-outlined" aria-hidden="true">event_available</span><span>Bookings</span></a>
+<a class="portal-nav-item" data-nav="financials" href="../financials_insights_dashboard_optimized/code.html" aria-current="page"><span class="material-symbols-outlined" aria-hidden="true">account_balance_wallet</span><span>Financials</span></a>
+<a class="portal-nav-item" data-nav="clients" aria-disabled="true" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">group</span><span>Clients</span></a>
+<a class="portal-nav-item" data-nav="reports" aria-disabled="true" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">analytics</span><span>Reports</span></a>
+<a class="portal-nav-item" data-nav="corporate" aria-disabled="true" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">business</span><span>Corporate Accounts</span></a>
+<a class="portal-nav-item" data-nav="tools" aria-disabled="true" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">construction</span><span>Agent Tools</span></a>
+</nav><button type="button" class="portal-support"><span class="material-symbols-outlined" aria-hidden="true">support_agent</span>Support Center</button></aside>
+<div class="reference-content"><main class="flex-1 w-full flex flex-col gap-8 reference-main" id="main-content">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-2 min-w-0">
+<div class="min-w-0 w-full md:w-auto">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface truncate">Financials &amp; Insights</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 truncate">Corporate credit position and booking activity. Sample figures for design review.</p>
+</div>
+<div class="flex gap-2 shrink-0">
+<select class="bg-surface-container-lowest border border-outline-variant text-on-surface font-label-md rounded-lg px-4 py-2 focus:border-primary focus:ring-0 truncate max-w-[150px]">
+<option>This Month</option>
+<option>Last Month</option>
+<option>Q1 2024</option>
+</select>
+<button class="bg-surface-container-lowest border border-outline-variant text-on-surface font-label-md rounded-lg px-4 py-2 hover:bg-surface-container-low flex items-center gap-2 whitespace-nowrap" type="button">
+<span class="material-symbols-outlined text-sm shrink-0">download</span> Export
+                    </button>
+</div>
+</div>
+<section class="bg-surface-raised bg-surface-container-lowest border border-outline-variant rounded-xl p-6 mb-7" aria-label="Corporate credit facility"><div class="flex flex-wrap justify-between gap-3 mb-5"><div><h2 class="font-headline-md text-xl mb-2">Corporate credit facility</h2><p class="text-sm text-on-surface-variant">Global Travel Partners · Current snapshot · AED</p></div><span class="text-xs text-primary">Active · illustrative figures</span></div><div class="grid md:grid-cols-3 gap-5"><div class="empty-metric"><span>Credit limit</span><strong>AED 100,000</strong><p>Illustrative approved facility</p></div><div class="empty-metric"><span>Credit used</span><strong>AED 32,500</strong><p>Outstanding against this facility</p></div><div class="empty-metric"><span>Available credit</span><strong>AED 67,500</strong><p>Remaining capacity for new bookings</p></div></div><p class="text-xs text-on-surface-variant mt-5">Confirmed bookings reduce available credit by their net value after corporate discount. Corporate discount: 10% sample rate. Facility balances are separate from the period’s booking activity.</p></section><!-- Metrics Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Metric 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-card border border-outline-variant relative overflow-hidden flex flex-col min-w-0">
+<div class="absolute top-0 left-0 w-full h-1 bg-primary"></div>
+<div class="flex justify-between items-start mb-4 gap-2">
+<p class="font-label-md text-label-md text-on-surface-variant truncate">Gross Booking Value</p>
+<span class="material-symbols-outlined text-secondary bg-primary/20 p-2 rounded-full shrink-0">account_balance_wallet</span>
+</div>
+<h3 class="font-display-lg text-headline-lg text-on-surface truncate">AED 142,500</h3>
+<p class="font-label-sm text-label-sm text-surface-tint mt-2 flex items-center gap-1 truncate w-full">
+<span class="material-symbols-outlined text-sm shrink-0">trending_up</span>
+<span class="truncate">+12.5% vs last month</span>
+</p>
+</div>
+<!-- Metric 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-card border border-outline-variant relative overflow-hidden flex flex-col min-w-0">
+<div class="absolute top-0 left-0 w-full h-1 bg-primary"></div>
+<div class="flex justify-between items-start mb-4 gap-2">
+<p class="font-label-md text-label-md text-on-surface-variant truncate">Corporate Discount Savings</p>
+<span class="material-symbols-outlined text-primary bg-primary-fixed/30 p-2 rounded-full shrink-0">savings</span>
+</div>
+<h3 class="font-display-lg text-headline-lg text-on-surface truncate">AED 14,250</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-2 truncate w-full">Corporate discount impact</p>
+</div>
+<!-- Metric 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-card border border-outline-variant flex flex-col min-w-0">
+<div class="flex justify-between items-start mb-4 gap-2">
+<p class="font-label-md text-label-md text-on-surface-variant truncate">Active Bookings</p>
+<span class="material-symbols-outlined text-tertiary bg-tertiary-fixed/50 p-2 rounded-full shrink-0">airplane_ticket</span>
+</div>
+<h3 class="font-display-lg text-headline-lg text-on-surface truncate">342</h3>
+<p class="font-label-sm text-label-sm text-surface-tint mt-2 flex items-center gap-1 truncate w-full">
+<span class="material-symbols-outlined text-sm shrink-0">trending_up</span>
+<span class="truncate">+5% vs last month</span>
+</p>
+</div>
+</div>
+<!-- Bento Grid: Charts & Leaderboard -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Line Chart: Booking Value Trend -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-card border border-outline-variant lg:col-span-2 flex flex-col min-w-0">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6 truncate">Booking Value Trend</h3>
+<div class="flex-1 w-full relative min-h-[300px]">
+<canvas aria-label="Booking value trend, January to June: AED 65,000, AED 78,000, AED 72,000, AED 95,000, AED 110,000, AED 142,500." id="valueTrendChart" role="img"></canvas>
+</div>
+</div>
+<!-- Agent Leaderboard -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-card border border-outline-variant flex flex-col min-w-0">
+<div class="flex justify-between items-center mb-6 gap-2">
+<h3 class="font-headline-md text-headline-md text-on-surface truncate">Agent Leaderboard</h3>
+<span class="material-symbols-outlined text-secondary shrink-0">emoji_events</span>
+</div>
+<ul class="flex-1 space-y-4 overflow-y-auto">
+<li class="flex items-center gap-4 p-3 rounded-lg bg-surface-container-low border border-outline-variant/50 min-w-0">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center font-label-md font-bold text-on-secondary-fixed-variant shrink-0">1</div>
+<div class="flex-1 min-w-0">
+<p class="font-label-md text-label-md text-on-surface truncate">Sarah Jenkins</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant truncate">142 Bookings</p>
+</div>
+<div class="font-label-md text-label-md text-surface-tint font-bold shrink-0 truncate max-w-[100px]">AED 42k</div>
+</li>
+<li class="flex items-center gap-4 p-3 border-b border-outline-variant/30 min-w-0">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center font-label-md font-bold text-on-surface-variant shrink-0">2</div>
+<div class="flex-1 min-w-0">
+<p class="font-label-md text-label-md text-on-surface truncate">Michael Chen</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant truncate">118 Bookings</p>
+</div>
+<div class="font-label-md text-label-md text-on-surface font-semibold shrink-0 truncate max-w-[100px]">AED 38k</div>
+</li>
+<li class="flex items-center gap-4 p-3 border-b border-outline-variant/30 min-w-0">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center font-label-md font-bold text-on-surface-variant shrink-0">3</div>
+<div class="flex-1 min-w-0">
+<p class="font-label-md text-label-md text-on-surface truncate">Elena Rodriguez</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant truncate">95 Bookings</p>
+</div>
+<div class="font-label-md text-label-md text-on-surface font-semibold shrink-0 truncate max-w-[100px]">AED 31k</div>
+</li>
+<li class="flex items-center gap-4 p-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-label-md text-on-surface-variant shrink-0">4</div>
+<div class="flex-1 min-w-0">
+<p class="font-label-md text-label-md text-on-surface truncate">David Kim</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant truncate">87 Bookings</p>
+</div>
+<div class="font-label-md text-label-md text-on-surface font-semibold shrink-0 truncate max-w-[100px]">AED 28k</div>
+</li>
+</ul>
+<button class="mt-4 text-primary font-label-md hover:underline w-full text-center truncate shrink-0" type="button">View Full List</button>
+</div>
+<!-- Most Booked Products -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-card border border-outline-variant lg:col-span-3 flex flex-col min-w-0">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6 truncate">Most Booked Products</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="flex items-center gap-4 p-4 rounded-lg bg-surface-container-low min-w-0">
+<div class="w-12 h-12 rounded-full bg-primary-fixed/30 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">airline_seat_recline_extra</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-label-md text-label-md text-on-surface truncate">dnata Lounge Access</p>
+<div class="w-full bg-surface-container-highest h-2 rounded-full mt-2 overflow-hidden">
+<div class="bg-primary h-full" style="width: 75%"></div>
+</div>
+</div>
+<span class="font-label-md font-bold text-on-surface shrink-0 truncate">75%</span>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-lg bg-surface-container-low min-w-0">
+<div class="w-12 h-12 rounded-full bg-primary/50 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">luggage</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-label-md text-label-md text-on-surface truncate">Porter Service</p>
+<div class="w-full bg-surface-container-highest h-2 rounded-full mt-2 overflow-hidden">
+<div class="bg-primary h-full" style="width: 55%"></div>
+</div>
+</div>
+<span class="font-label-md font-bold text-on-surface shrink-0 truncate">55%</span>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-lg bg-surface-container-low min-w-0">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed/50 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">local_taxi</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-label-md text-label-md text-on-surface truncate">Chauffeur Transfer</p>
+<div class="w-full bg-surface-container-highest h-2 rounded-full mt-2 overflow-hidden">
+<div class="bg-tertiary h-full" style="width: 30%"></div>
+</div>
+</div>
+<span class="font-label-md font-bold text-on-surface shrink-0 truncate">30%</span>
+</div>
+</div>
+</div>
+</div>
+</main><footer class="bg-surface-container-highest  text-primary  font-body-md text-body-md border-t border-outline-variant w-full bottom-0 mt-12 overflow-hidden">
+<div class="w-full py-12 px-margin-desktop flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto gap-6 min-w-0">
+<div class="font-headline-lg text-headline-lg text-primary  uppercase tracking-tight font-bold truncate max-w-full text-center md:text-left"><img class="dnata-logo" src="../shared/dnata-logo.svg" alt="dnata" width="120" height="33"></div>
+<div class="flex flex-wrap justify-center gap-6 font-label-sm text-label-sm min-w-0">
+<a class="text-on-surface-variant  hover:underline hover:text-primary  transition-opacity duration-300 whitespace-nowrap" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant  hover:underline hover:text-primary  transition-opacity duration-300 whitespace-nowrap" href="#">Terms of Service</a>
+<a class="text-on-surface-variant  hover:underline hover:text-primary  transition-opacity duration-300 whitespace-nowrap" href="#">Help Center</a>
+<a class="text-on-surface-variant  hover:underline hover:text-primary  transition-opacity duration-300 whitespace-nowrap" href="#">Contact Sales</a>
+</div>
+<div class="text-on-surface-variant  text-label-sm truncate max-w-full text-center md:text-right">
+                    © 2024 dnata Services. All rights reserved.
+                </div>
+</div>
+</footer></div>
+<script>
+        // Chart.js implementation for Booking Value Trend
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('valueTrendChart').getContext('2d');
+            
+            // dnata Red theme color
+            const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--brand-primary').trim(); 
+            const primaryContainer = getComputedStyle(document.documentElement).getPropertyValue('--brand-primary').trim();
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Booking Value (AED )',
+                        data: [65000, 78000, 72000, 95000, 110000, 142500],
+                        borderColor: primaryColor,
+                        backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--chart-fill').trim(),
+                        borderWidth: 3,
+                        pointBackgroundColor: primaryContainer,
+                        pointBorderColor: getComputedStyle(document.documentElement).getPropertyValue('--surface-raised').trim(),
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        fill: true,
+                        tension: 0.4 // smooth curves
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--text-primary').trim(),
+                            titleFont: { family: 'Inter', size: 14 },
+                            bodyFont: { family: 'Inter', size: 14, weight: 'bold' },
+                            padding: 12,
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return 'AED ' + context.parsed.y.toLocaleString();
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: getComputedStyle(document.documentElement).getPropertyValue('--surface-strong').trim(),
+                                drawBorder: false
+                            },
+                            ticks: {
+                                font: { family: 'Inter', size: 12 },
+                                color: getComputedStyle(document.documentElement).getPropertyValue('--text-muted').trim(),
+                                callback: function(value) {
+                                    return 'AED ' + (value / 1000) + 'k';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false,
+                                drawBorder: false
+                            },
+                            ticks: {
+                                font: { family: 'Inter', size: 12 },
+                                color: getComputedStyle(document.documentElement).getPropertyValue('--text-muted').trim()
+                            }
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index',
+                    },
+                }
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Booking Details - dnata Concierge</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&display=block"><link rel="stylesheet" href="../shared/reference.css"><script src="https://cdn.tailwindcss.com/3.4.17?plugins=forms,container-queries"></script><script src="../shared/tailwind.config.js"></script></head><body>
+<header class="portal-header" aria-label="Global navigation">
+<a class="dnata-wordmark" href="../agent_dashboard/code.html" aria-label="dnata Agent Portal home"><img class="dnata-logo" src="../shared/dnata-logo.svg" alt="dnata" width="120" height="33"></a>
+<label class="portal-search"><span class="material-symbols-outlined" aria-hidden="true">search</span><input type="search" aria-label="Search bookings and references" placeholder="Search bookings, references..."></label>
+<div class="portal-header-actions"><a class="portal-new-booking" href="../booking_single_journey/code.html"><span class="material-symbols-outlined" aria-hidden="true">add</span>New Booking</a><button type="button" class="portal-icon" aria-label="Notifications"><span class="material-symbols-outlined" aria-hidden="true">notifications</span></button><button type="button" class="portal-icon" aria-label="Settings"><span class="material-symbols-outlined" aria-hidden="true">settings</span></button><button type="button" class="portal-avatar" aria-label="Sarah's profile">SJ</button></div>
+</header>
+<aside class="portal-sidebar" aria-label="Sidebar"><div class="portal-workspace"><span class="portal-eyebrow">Agent Portal</span><strong>Global Travel Partners</strong><span>Premium Concierge</span></div><nav class="portal-nav" aria-label="Primary navigation"><a class="portal-nav-item" data-nav="dashboard" href="../agent_dashboard/code.html"><span class="material-symbols-outlined" aria-hidden="true">dashboard</span><span>Dashboard</span></a>
+<a class="portal-nav-item" data-nav="marketplace" aria-disabled="true" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">storefront</span><span>Marketplace</span></a>
+<a class="portal-nav-item" data-nav="bookings" href="../all_bookings_management/code.html" aria-current="page"><span class="material-symbols-outlined" aria-hidden="true">event_available</span><span>Bookings</span></a>
+<a class="portal-nav-item" data-nav="financials" href="../financials_insights_dashboard_optimized/code.html"><span class="material-symbols-outlined" aria-hidden="true">account_balance_wallet</span><span>Financials</span></a>
+<a class="portal-nav-item" data-nav="clients" aria-disabled="true" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">group</span><span>Clients</span></a>
+<a class="portal-nav-item" data-nav="reports" aria-disabled="true" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">analytics</span><span>Reports</span></a>
+<a class="portal-nav-item" data-nav="corporate" aria-disabled="true" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">business</span><span>Corporate Accounts</span></a>
+<a class="portal-nav-item" data-nav="tools" aria-disabled="true" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">construction</span><span>Agent Tools</span></a>
+</nav><button type="button" class="portal-support"><span class="material-symbols-outlined" aria-hidden="true">support_agent</span>Support Center</button></aside>
+<div class="reference-content"><main class="flex-1 w-full reference-main" id="main-content">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Booking Details</h1>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-success-subtle text-success font-label-sm text-label-sm border border-success-border">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                            Confirmed
+                        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
+                        Reference: <span class="font-bold text-on-surface">MB-2024-8892</span>
+<button class="text-primary hover:text-primary/80" title="Copy Reference" type="button">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+</p>
+</div>
+<div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
+<button class="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-outline hover:bg-surface-container-low text-on-surface font-label-md text-label-md transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+                        Modify
+                    </button>
+<button class="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-error/30 text-error hover:bg-error-container/50 font-label-md text-label-md transition-colors shadow-sm bg-surface" type="button">
+<span class="material-symbols-outlined text-[20px]">cancel</span>
+                        Cancel
+                    </button>
+<button class="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-secondary-container text-on-secondary-container hover:bg-secondary-container/90 font-label-md text-label-md transition-colors shadow-sm font-semibold primary-action" type="button">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                        PDF Receipt
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Left Column (Wider) -->
+<div class="lg:col-span-2 flex flex-col gap-6">
+<!-- Flight Info Card (Glassmorphism/Premium) -->
+<div class="bg-surface rounded-xl border border-outline-variant shadow-card overflow-hidden relative">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary"></div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary bg-primary-container/20 p-2 rounded-lg">flight_land</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Arrival Flight Info</h2>
+</div>
+<div class="flex flex-col md:flex-row items-center justify-between gap-8 bg-surface-container-low p-6 rounded-xl border border-outline-variant">
+<!-- Origin -->
+<div class="text-center md:text-left flex-1">
+<div class="font-display-lg text-display-lg text-on-surface mb-1">DXB</div>
+<div class="font-body-md text-body-md text-on-surface-variant font-medium">Dubai Int'l</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-2 flex items-center justify-center md:justify-start gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span> 24 Oct, 2024
+                                    </div>
+</div>
+<!-- Flight Path -->
+<div class="flex-1 flex flex-col items-center w-full relative px-4">
+<div class="font-label-md text-label-md text-on-surface font-bold mb-2 bg-surface px-3 py-1 rounded-full border border-outline-variant shadow-sm z-10 flex items-center gap-2">
+<img alt="Emirates" class="w-4 h-4 object-contain" data-alt="A clean, minimalist vector logo of Emirates airlines, featuring recognizable corporate colors suitable for a premium travel interface context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaHuaVZlZTaJ5WCXFZ1mMhtLcDw1itDeRAwu89N4ykSo3ruRcHjR4wWZ9o-Ttw4sOFrabmd3HczFDjxJdOYRPPi7t87zWQ3S7nsC4LtHf7vN3jFLw8WwbVgqsVv9YDTUa-2hvMNnEvEgCcGpKR2knomz1oXIShFiudhztv2j3UzfTwLnn9d9zGcbzbB_XAwv8pTkhrS1G-buAd2A_quBgNIEJexp9wbP-ypw-7Jug0JuIIuD9XvHvg9E83aGdkXlhOxYM-pDecrpz8"/>
+                                        EK 001
+                                    </div>
+<div class="w-full h-[2px] bg-outline-variant relative flex items-center">
+<div class="w-2 h-2 rounded-full bg-primary absolute left-0"></div>
+<span class="material-symbols-outlined text-primary absolute left-1/2 -translate-x-1/2 bg-surface-container-low px-2">flight</span>
+<div class="w-2 h-2 rounded-full border-2 border-outline-variant bg-surface absolute right-0"></div>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-2">7h 25m duration</div>
+</div>
+<!-- Destination -->
+<div class="text-center md:text-right flex-1">
+<div class="font-display-lg text-display-lg text-on-surface mb-1">LHR</div>
+<div class="font-body-md text-body-md text-on-surface-variant font-medium">London Heathrow</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-2 flex items-center justify-center md:justify-end gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span> 08:30 (Scheduled)
+                                    </div>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+<div class="bg-surface-container-lowest border border-outline-variant p-3 rounded-lg flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">meeting_room</span>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Terminal</div>
+<div class="font-label-md text-label-md font-bold text-on-surface">T3</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-3 rounded-lg flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">luggage</span>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Baggage Belt</div>
+<div class="font-label-md text-label-md font-bold text-on-surface">TBD</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-3 rounded-lg flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">airplane_ticket</span>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Class</div>
+<div class="font-label-md text-label-md font-bold text-on-surface">Business</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-3 rounded-lg flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">group</span>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Passengers</div>
+<div class="font-label-md text-label-md font-bold text-on-surface">2 Adults</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Service Summary Card -->
+<div class="bg-surface rounded-xl border border-outline-variant shadow-card p-6 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-secondary"></div>
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary bg-primary/30 p-2 rounded-lg">stars</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Service Summary</h2>
+</div>
+<span class="bg-secondary-container text-on-secondary-container font-label-sm text-label-sm px-3 py-1 rounded-full font-bold uppercase tracking-wider">Premium</span>
+</div>
+<div class="flex flex-col md:flex-row gap-6">
+<div class="flex-1">
+<h3 class="font-headline-md text-[20px] font-bold text-on-surface mb-2">Elite Meet &amp; Greet</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Premium arrival assistance tailored for VIPs, ensuring a seamless journey from the airbridge to the vehicle.</p>
+<ul class="space-y-3">
+<li class="flex items-start gap-3">
+<div class="bg-primary/10 rounded-full p-1 mt-0.5">
+<span class="material-symbols-outlined text-primary text-[16px] font-bold">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface">Personalized welcome at the arrival gate</span>
+</li>
+<li class="flex items-start gap-3">
+<div class="bg-primary/10 rounded-full p-1 mt-0.5">
+<span class="material-symbols-outlined text-primary text-[16px] font-bold">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface">Fast-track immigration and customs clearance</span>
+</li>
+<li class="flex items-start gap-3">
+<div class="bg-primary/10 rounded-full p-1 mt-0.5">
+<span class="material-symbols-outlined text-primary text-[16px] font-bold">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface">Dedicated porter service for baggage retrieval</span>
+</li>
+<li class="flex items-start gap-3">
+<div class="bg-primary/10 rounded-full p-1 mt-0.5">
+<span class="material-symbols-outlined text-primary text-[16px] font-bold">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface">Escort to receiving party or onward transportation</span>
+</li>
+</ul>
+</div>
+<!-- Image representing the service -->
+<div class="w-full md:w-1/3 aspect-[4/3] rounded-lg overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A premium photograph showing a smartly dressed concierge agent smiling warmly while greeting a traveler in a modern, well-lit luxury airport terminal. The atmosphere is professional, calm, and exclusive, reflecting a white-glove hospitality service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuXVL8RXW-6p6g7e0fw8kt5TTRNsA5MDHgLMy4_gWYDbuHEZ_lYam1-VDNXHNqXUnbBvWLwJg3Hh4PXyGB8xC5HgtmjJk9-kjyRWsS129tmTHgHOSMu7ER44IuHwnas0_PSO1FZvQEjWrKdgo4l1LjI0j4kUa9mGyGSchJEesuNRZ1kdi7IKaDnZsC6rzI9WiS3lrNFrlV9pd9CaTuLz1OheORisy0Igy9nIizbHM6kyiePopTH4yVcAmkutXV_dnkX_ZXIwnP3hXQ"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (Narrower) -->
+<div class="flex flex-col gap-6">
+<!-- Guest Details Card -->
+<div class="bg-surface rounded-xl border border-outline-variant shadow-card p-6">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-on-surface-variant bg-surface-container-high p-2 rounded-lg">person</span>
+<h2 class="font-headline-md text-[20px] font-semibold text-on-surface">Lead Guest</h2>
+</div>
+<div class="flex items-center gap-4 mb-6 pb-6 border-b border-outline-variant">
+<div class="w-14 h-14 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center font-headline-md text-headline-md font-bold">
+                                JS
+                            </div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface font-bold text-lg">Mr. James Sterling</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">VIP Corporate Traveler</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">call</span> Phone Number</span>
+<span class="font-body-md text-body-md text-on-surface font-medium">+971 50 123 4567</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">mail</span> Email Address</span>
+<span class="font-body-md text-body-md text-on-surface font-medium truncate" title="j.sterling@globalpartners.com">j.sterling@globalpartners.com</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">assignment</span> Special Notes</span>
+<div class="bg-surface-container-low p-3 rounded-lg border border-outline-variant">
+<span class="font-body-md text-[14px] text-on-surface italic">"Guest prefers wheelchair assistance upon disembarkation. Requires immediate transfer to pre-booked vehicle."</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Credit Charge Summary Card -->
+<div class="bg-surface rounded-xl border border-outline-variant shadow-card p-6">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-on-surface-variant bg-surface-container-high p-2 rounded-lg">receipt_long</span>
+<h2 class="font-headline-md text-[20px] font-semibold text-on-surface">Credit Charge Summary</h2>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Elite Meet &amp; Greet (x2)</span>
+<span class="font-body-md text-body-md text-on-surface">AED 600.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">info</span> Tax (5%)</span>
+<span class="font-body-md text-body-md text-on-surface">AED 30.00</span>
+</div>
+<div class="flex justify-between items-center text-primary">
+<span class="font-body-md text-body-md">Corporate Discount (10%)</span>
+<span class="font-body-md text-body-md">- AED 60.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Platform Fee</span>
+<span class="font-body-md text-body-md text-on-surface">AED 39.38</span>
+</div>
+</div>
+<div class="pt-4 border-t-2 border-dashed border-outline-variant">
+<div class="flex justify-between items-end mb-2">
+<span class="font-headline-md text-[20px] font-semibold text-on-surface">Total</span>
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface">AED 669.38</span>
+</div>
+<div class="flex items-center gap-2 bg-tertiary-container/20 text-tertiary px-3 py-2 rounded-lg border border-tertiary/20 mt-4">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm font-semibold">Charged to Corporate Credit Facility</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main></div>
+
+</body></html>

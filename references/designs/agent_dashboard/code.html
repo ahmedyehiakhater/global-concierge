@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>dnata | Agent Dashboard</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&display=block"><link rel="stylesheet" href="../shared/reference.css"><script src="https://cdn.tailwindcss.com/3.4.17?plugins=forms,container-queries"></script><script src="../shared/tailwind.config.js"></script></head><body>
+<header class="portal-header" aria-label="Global navigation">
+<a class="dnata-wordmark" href="../agent_dashboard/code.html" aria-label="dnata Agent Portal home"><img class="dnata-logo" src="../shared/dnata-logo.svg" alt="dnata" width="120" height="33"></a>
+<label class="portal-search"><span class="material-symbols-outlined" aria-hidden="true">search</span><input type="search" aria-label="Search bookings and references" placeholder="Search bookings, references..."></label>
+<div class="portal-header-actions"><a class="portal-new-booking" href="../booking_single_journey/code.html"><span class="material-symbols-outlined" aria-hidden="true">add</span>New Booking</a><button type="button" class="portal-icon" aria-label="Notifications"><span class="material-symbols-outlined" aria-hidden="true">notifications</span></button><button type="button" class="portal-icon" aria-label="Settings"><span class="material-symbols-outlined" aria-hidden="true">settings</span></button><button type="button" class="portal-avatar" aria-label="Sarah's profile">SJ</button></div>
+</header>
+<aside class="portal-sidebar" aria-label="Sidebar"><div class="portal-workspace"><span class="portal-eyebrow">Agent Portal</span><strong>Global Travel Partners</strong><span>Premium Concierge</span></div><nav class="portal-nav" aria-label="Primary navigation"><a class="portal-nav-item" data-nav="dashboard" href="../agent_dashboard/code.html" aria-current="page"><span class="material-symbols-outlined" aria-hidden="true">dashboard</span><span>Dashboard</span></a>
+<a class="portal-nav-item" data-nav="marketplace" aria-disabled="true" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">storefront</span><span>Marketplace</span></a>
+<a class="portal-nav-item" data-nav="bookings" href="../all_bookings_management/code.html"><span class="material-symbols-outlined" aria-hidden="true">event_available</span><span>Bookings</span></a>
+<a class="portal-nav-item" data-nav="financials" href="../financials_insights_dashboard_optimized/code.html"><span class="material-symbols-outlined" aria-hidden="true">account_balance_wallet</span><span>Financials</span></a>
+<a class="portal-nav-item" data-nav="clients" aria-disabled="true" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">group</span><span>Clients</span></a>
+<a class="portal-nav-item" data-nav="reports" aria-disabled="true" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">analytics</span><span>Reports</span></a>
+<a class="portal-nav-item" data-nav="corporate" aria-disabled="true" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">business</span><span>Corporate Accounts</span></a>
+<a class="portal-nav-item" data-nav="tools" aria-disabled="true" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">construction</span><span>Agent Tools</span></a>
+</nav><button type="button" class="portal-support"><span class="material-symbols-outlined" aria-hidden="true">support_agent</span>Support Center</button></aside>
+<div class="reference-content"><main class="reference-main" id="main-content">
+
+<!-- Hero Welcome Section -->
+<section class="relative overflow-hidden rounded-2xl mb-10 h-64 bg-surface-container-lowest border border-outline-variant card-shadow flex items-center">
+<div class="absolute inset-0 z-0 opacity-20">
+</div>
+<div class="relative z-10 px-10 max-w-2xl">
+<h1 class="font-display-lg text-display-lg text-on-surface mb-2">Welcome back, Sarah.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Your premium lounge services are operating at peak efficiency. You have 12 active bookings for today's departures.</p>
+</div>
+<div class="absolute right-10 top-1/2 -translate-y-1/2 hidden md:block">
+<div class="w-48 h-48 rounded-full border-4 border-primary opacity-30 animate-pulse"></div>
+</div>
+</section>
+<!-- Bento Grid Dashboard -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left: Active Tracking (8 Cols) -->
+<div class="lg:col-span-8 space-y-gutter">
+<!-- Current Active Services Widget -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 card-shadow border border-outline-variant">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface">Active Services Tracking</h3>
+<button class="text-primary font-label-md text-label-md hover:underline flex items-center gap-1" type="button">
+                                View all <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+<div class="space-y-4">
+<!-- Service Row 1 -->
+<div class="flex items-center justify-between p-4 bg-surface-bright rounded-xl border border-outline-variant hover:border-primary transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary-container/10 text-primary rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">flight_takeoff</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">EK202 | Meet &amp; Greet Gold</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Passenger: Mr. James Henderson • Gate B12</p>
+</div>
+</div>
+<div class="text-right">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-secondary-container/20 text-secondary font-label-sm text-label-sm mb-1">In Progress</span>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Staff: Aisha Q.</p>
+</div>
+</div>
+<!-- Service Row 2 -->
+<div class="flex items-center justify-between p-4 bg-surface-bright rounded-xl border border-outline-variant hover:border-primary transition-colors cursor-pointer vip-accent" style="transform: scale(1);">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary/30 text-primary rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">king_bed</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Premium Lounge Access (VIP Tier)</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Passenger: Ms. Elena Rossi • Terminal 3 Central</p>
+</div>
+</div>
+<div class="text-right">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-primary-container/10 text-primary font-label-sm text-label-sm mb-1">Confirmed</span>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Scheduled: 14:30</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Key Modules Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="bg-surface-container-lowest rounded-2xl p-6 card-shadow border border-outline-variant hover:-translate-y-1 transition-transform cursor-pointer">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">group_add</span>
+<h4 class="font-headline-md text-headline-md mb-2">Corporate Portal</h4>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6">Manage corporate billing, employee travel policies, and bulk service vouchers.</p>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-3/4"></div>
+</div>
+<p class="text-label-sm font-label-sm mt-2 text-on-surface-variant">75% of monthly quota used</p>
+</div>
+<div class="bg-surface-container-lowest rounded-2xl p-6 card-shadow border border-outline-variant hover:-translate-y-1 transition-transform cursor-pointer">
+<span class="material-symbols-outlined text-secondary text-4xl mb-4">analytics</span>
+<h4 class="font-headline-md text-headline-md mb-2">Performance Reports</h4>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6">Detailed analytics on booking trends, revenue per seat, and agent commissions.</p>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-primary border-2 border-surface-bright"></div>
+<div class="w-8 h-8 rounded-full bg-secondary border-2 border-surface-bright"></div>
+<div class="w-8 h-8 rounded-full bg-tertiary border-2 border-surface-bright"></div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border-2 border-surface-bright flex items-center justify-center text-[10px] font-bold">+5</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Sidebar: Notifications & Support (4 Cols) -->
+<div class="lg:col-span-4 space-y-gutter">
+<!-- Notifications Card -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 card-shadow border border-outline-variant flex flex-col h-full">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">notifications_active</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Notifications</h3>
+</div>
+<div class="space-y-6 flex-grow">
+<div class="flex gap-4 items-start">
+<div class="w-2 h-2 rounded-full bg-primary mt-2"></div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Schedule Update: EK202</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Departure delayed by 15 mins. Service staff notified.</p>
+<span class="text-[10px] uppercase font-bold text-outline mt-1 block">2 MINS AGO</span>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-2 h-2 rounded-full bg-primary mt-2"></div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">New Corporate Account</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">SkyHigh Tech Ltd. has requested a partnership review.</p>
+<span class="text-[10px] uppercase font-bold text-outline mt-1 block">1 HOUR AGO</span>
+</div>
+</div>
+<div class="flex gap-4 items-start opacity-60">
+<div class="w-2 h-2 rounded-full bg-outline-variant mt-2"></div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Booking Confirmed</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Reference #MRH-99281 confirmed successfully.</p>
+<span class="text-[10px] uppercase font-bold text-outline mt-1 block">5 HOURS AGO</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-8 py-3 text-primary border border-primary/20 rounded-lg font-label-md text-label-md hover:bg-primary-container/5 transition-colors" type="button">
+                            Clear Notifications
+                        </button>
+</div>
+<!-- Agent Support Quick Action -->
+<div class="bg-tertiary rounded-2xl p-6 card-shadow text-on-tertiary relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="font-headline-md text-headline-md mb-2">Need Assistance?</h3>
+<p class="text-label-md font-label-md mb-6 opacity-90">Our dedicated support desk is available 24/7 for premium agents.</p>
+<button class="bg-surface-bright text-tertiary px-6 py-2 rounded-lg font-label-md text-label-md shadow-sm hover:bg-white transition-all" type="button">
+                                Chat with Specialist
+                            </button>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-9xl opacity-10 rotate-12">headset_mic</span>
+</div>
+<!-- Promo/Information Widget -->
+<div class="rounded-2xl h-48 bg-cover bg-center flex items-end p-6 group cursor-pointer relative" data-alt="A luxurious, high-contrast photograph of a private chauffeur car waiting outside a sleek, modern airport terminal at dusk. Warm golden lights from the terminal reflect on the polished black surface of the vehicle, creating a sense of exclusivity and premium travel. The image is clean, professional, and fits the dnata gold-tier service branding." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD1qg3vTMwuvaTed6EL6pH8FETAVJN6fKCao69bgYmXcW6dA4tKNWYvmahsAVqW6rbVhcB5dnjwjPt2Uo9FRCZzmGuWgpnWXI87BgPJDbpfEgrlWLG9AhrAzfKhzqcTUSDdEFgdErpZntkkgXT0UzE-HuO8DFqALGsrZD-yzfmDRrdqrvHjZFBJTN4IiJuHxJv81g1dZwdb5beYA_OS1ncSkNsYnRHz0f-DqZ_RJXukkETLgTGUomlQPvRDMwXB95aM-FXgj9-RoZG9')">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent rounded-2xl transition-opacity group-hover:opacity-90"></div>
+<div class="relative z-10">
+<h4 class="text-white font-headline-md text-label-md mb-1">New: Chauffeur Elite</h4>
+<p class="text-white/80 text-label-sm font-label-sm">Upgrade your clients to luxury ground transfers.</p>
+</div>
+</div>
+</div>
+</div>
+
+</main><footer class="bg-surface-container-highest border-t border-outline-variant w-full mt-12">
+<div class="w-full py-12 px-margin-desktop flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto">
+<div class="mb-6 md:mb-0">
+<span class="font-headline-lg text-headline-lg text-primary font-bold"><img class="dnata-logo" src="../shared/dnata-logo.svg" alt="dnata" width="120" height="33"></span>
+<p class="text-on-surface-variant font-body-md text-body-md mt-2">© 2024 dnata Services. All rights reserved.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary hover:underline transition-all" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary hover:underline transition-all" href="#">Terms of Service</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary hover:underline transition-all" href="#">Help Center</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary hover:underline transition-all" href="#">Contact Sales</a>
+</div>
+</div>
+</footer></div>
+<script>
+        // Micro-interactions for dashboard elements
+        document.querySelectorAll('.cursor-pointer').forEach(el => {
+            el.addEventListener('mousedown', () => {
+                el.style.transform = 'scale(0.98)';
+            });
+            el.addEventListener('mouseup', () => {
+                el.style.transform = 'scale(1)';
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>
