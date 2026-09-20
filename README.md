@@ -321,3 +321,15 @@ The full product and scripted scenes have not yet been connected. See [server/RE
 ## Working product (20 September)
 
 Open **http://127.0.0.1:5173/product.html** for the connected React product. It includes demo login, Dashboard, single/multi-leg booking, saved traveller drafts, service selection, corporate discount/credit confirmation, searchable bookings, details and live session Financials. Reset archives the visitor before returning to login. See [src/product/README.md](src/product/README.md) for supported flows and the controller interface for future bot scenes.
+
+
+## Windows offline booth package
+
+Download `releases/Global-Concierge-Windows-x64.zip`, extract the entire folder,
+and run **Start Global Concierge.cmd**. Use **Stop Global Concierge.cmd** when
+finished. The included README covers the laptop rehearsal and troubleshooting.
+The package includes Node 22.23.2 for Windows x64, the compiled application and
+the local SQLite backend. No visitor database is committed or included in the ZIP.
+Company device restrictions still require testing on the target Windows laptop.
+
+Packaging source and rebuild instructions are in `packaging/README.md`.

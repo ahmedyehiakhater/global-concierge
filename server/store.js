@@ -1,3 +1,4 @@
+import { amendment } from "../shared/management.js";
 import {
   validateDetails,
   cleanDetails,
@@ -24,6 +25,9 @@ export function openStore(path) {
     CREATE TABLE IF NOT EXISTS sessions(id TEXT PRIMARY KEY, created TEXT NOT NULL, archived TEXT, features TEXT NOT NULL DEFAULT '[]');
     CREATE TABLE IF NOT EXISTS bookings(id TEXT PRIMARY KEY, session_id TEXT NOT NULL REFERENCES sessions(id), request_key TEXT NOT NULL, payload TEXT NOT NULL, subtotal INTEGER NOT NULL, discount INTEGER NOT NULL, total INTEGER NOT NULL, created TEXT NOT NULL, UNIQUE(session_id,request_key));
     CREATE TABLE IF NOT EXISTS drafts(session_id TEXT PRIMARY KEY REFERENCES sessions(id), payload TEXT NOT NULL);
+    CREATE TABLE IF NOT EXISTS rehearsal_drafts(session_id TEXT PRIMARY KEY REFERENCES sessions(id), payload TEXT NOT NULL);
+    CREATE TABLE IF NOT EXISTS booking_state(booking_id TEXT PRIMARY KEY REFERENCES bookings(id), payload TEXT NOT NULL, status TEXT NOT NULL, version INTEGER NOT NULL, history TEXT NOT NULL);
+    CREATE TABLE IF NOT EXISTS management_requests(session_id TEXT NOT NULL REFERENCES sessions(id), request_key TEXT NOT NULL, signature TEXT NOT NULL, PRIMARY KEY(session_id, request_key));
     CREATE TABLE IF NOT EXISTS resets(request_key TEXT PRIMARY KEY, old_id TEXT NOT NULL, new_id TEXT NOT NULL);
   `);
   const now = () => new Date().toISOString();
@@ -57,16 +61,37 @@ export function openStore(path) {
     const bookings = db
       .prepare("SELECT * FROM bookings WHERE session_id=? ORDER BY created,id")
       .all(id)
-      .map((b) => ({
-        id: b.id,
-        requestKey: b.request_key,
-        ...JSON.parse(b.payload),
-        subtotal: b.subtotal,
-        discount: b.discount,
-        total: b.total,
-        created: b.created,
-      }));
-    const booked = bookings.reduce((sum, b) => sum + b.total, 0);
+      .map((b) => {
+        const current = db
+          .prepare("SELECT * FROM booking_state WHERE booking_id=?")
+          .get(b.id);
+        return {
+          id: b.id,
+          requestKey: b.request_key,
+          ...JSON.parse(b.payload),
+          subtotal: b.subtotal,
+          discount: b.discount,
+          total: b.total,
+          created: b.created,
+          status: current?.status || "confirmed",
+          version: current?.version || 1,
+          history: current
+            ? JSON.parse(current.history)
+            : [
+                {
+                  kind: "confirmed",
+                  at: b.created,
+                  delta: b.total,
+                  total: b.total,
+                },
+              ],
+          ...(current ? JSON.parse(current.payload) : {}),
+        };
+      });
+    const booked = bookings.reduce(
+      (sum, b) => sum + (b.status === "cancelled" ? 0 : b.total),
+      0,
+    );
     return {
       id,
       created: row.created,
@@ -74,6 +99,11 @@ export function openStore(path) {
       draft: JSON.parse(
         db.prepare("SELECT payload FROM drafts WHERE session_id=?").get(id)
           ?.payload || "null",
+      ),
+      rehearsalDraft: JSON.parse(
+        db
+          .prepare("SELECT payload FROM rehearsal_drafts WHERE session_id=?")
+          .get(id)?.payload || "null",
       ),
       bookings,
       currency: "AED",
@@ -133,7 +163,8 @@ export function openStore(path) {
         return snapshot(id);
       });
     },
-    draft(id, payload) {
+    draft(id, payload, rehearsal = false) {
+      const table = rehearsal ? "rehearsal_drafts" : "drafts";
       payload = normalizeDraft(payload);
       const error = validateDetails(payload, false);
       if (error) throw new Problem(400, error);
@@ -167,12 +198,12 @@ export function openStore(path) {
       return transaction(() => {
         active(id);
         db.prepare(
-          "INSERT INTO drafts VALUES(?,?) ON CONFLICT(session_id) DO UPDATE SET payload=excluded.payload",
+          `INSERT INTO ${table} VALUES(?,?) ON CONFLICT(session_id) DO UPDATE SET payload=excluded.payload`,
         ).run(id, JSON.stringify(clean));
         return snapshot(id);
       });
     },
-    book(id, key, payload) {
+    book(id, key, payload, rehearsal = false) {
       if (
         !payload ||
         !["single", "multi"].includes(payload.mode) ||
@@ -239,7 +270,122 @@ export function openStore(path) {
           total,
           now(),
         );
-        db.prepare("DELETE FROM drafts WHERE session_id=?").run(id);
+        db.prepare(
+          `DELETE FROM ${rehearsal ? "rehearsal_drafts" : "drafts"} WHERE session_id=?`,
+        ).run(id);
+        return snapshot(id);
+      });
+    },
+    previewAmend(id, bookingId, version, payload) {
+      const s = snapshot(id),
+        b = s.bookings.find((b) => b.id === bookingId);
+      if (!b) throw new Problem(404, "Booking not found.");
+      if (b.version !== version)
+        throw new Problem(
+          409,
+          "This booking changed. Reopen it before making changes.",
+        );
+      try {
+        return amendment(b, payload, s.credit.available);
+      } catch (e) {
+        throw new Problem(400, e.message);
+      }
+    },
+    manage(id, key, action, body) {
+      return transaction(() => {
+        active(id);
+        if (!["amend", "cancel"].includes(action))
+          throw new Problem(400, "Unknown booking action.");
+        const signature = JSON.stringify({
+          action,
+          bookingId: body.bookingId,
+          version: body.version,
+          payload: action === "amend" ? body.payload : null,
+        });
+        const prior = db
+          .prepare(
+            "SELECT signature FROM management_requests WHERE session_id=? AND request_key=?",
+          )
+          .get(id, key);
+        if (prior) {
+          if (prior.signature !== signature)
+            throw new Problem(
+              409,
+              "This request key belongs to a different change.",
+            );
+          return snapshot(id);
+        }
+        const s = snapshot(id),
+          b = s.bookings.find((b) => b.id === body.bookingId);
+        if (!b) throw new Problem(404, "Booking not found.");
+        if (b.status === "cancelled")
+          throw new Problem(
+            409,
+            "This booking is already cancelled. No further credit is returned.",
+          );
+        if (b.version !== body.version)
+          throw new Problem(
+            409,
+            "This booking changed. Reopen it before making changes.",
+          );
+        let updated = {
+          mode: b.mode,
+          adults: b.adults,
+          services: b.services,
+          ...(b.legs?.length ? cleanDetails(b) : {}),
+          subtotal: b.subtotal,
+          discount: b.discount,
+          total: b.total,
+        };
+        let delta = -b.total;
+        if (action === "amend") {
+          let change;
+          try {
+            change = amendment(b, body.payload, s.credit.available);
+          } catch (e) {
+            throw new Problem(400, e.message);
+          }
+          if (!change.affordable)
+            throw new Problem(409, "Insufficient available corporate credit.");
+          updated = {
+            ...change.payload,
+            subtotal: change.subtotal,
+            discount: change.discount,
+            total: change.total,
+          };
+          delta = change.difference;
+        }
+        const history = [
+          ...b.history,
+          {
+            kind: action === "amend" ? "amended" : "cancelled",
+            at: now(),
+            delta,
+            total: updated.total,
+            previousTotal: b.total,
+            before: {
+              mode: b.mode,
+              adults: b.adults,
+              services: b.services,
+              ...(b.legs?.length ? cleanDetails(b) : {}),
+            },
+            after: updated,
+          },
+        ];
+        db.prepare(
+          "INSERT INTO booking_state VALUES(?,?,?,?,?) ON CONFLICT(booking_id) DO UPDATE SET payload=excluded.payload,status=excluded.status,version=excluded.version,history=excluded.history",
+        ).run(
+          b.id,
+          JSON.stringify(updated),
+          action === "cancel" ? "cancelled" : "confirmed",
+          b.version + 1,
+          JSON.stringify(history),
+        );
+        db.prepare("INSERT INTO management_requests VALUES(?,?,?)").run(
+          id,
+          key,
+          signature,
+        );
         return snapshot(id);
       });
     },

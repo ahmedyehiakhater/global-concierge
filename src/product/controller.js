@@ -37,6 +37,7 @@ export function createProductController(
   }
   const pendingKey = (id) => "gc-product-confirm:" + id;
   const controller = {
+    replaceSession(session) { emit({session, detail: state.detail ? session.bookings.find(b=>b.id===state.detail.id) : null}); },
     subscribe(fn) {
       listeners.add(fn);
       return () => listeners.delete(fn);

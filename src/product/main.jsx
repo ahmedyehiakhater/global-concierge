@@ -1,3 +1,4 @@
+import { ManagementWorkspace } from "./ManagementWorkspace.jsx";
 import React, { useEffect, useState, useSyncExternalStore } from "react";
 import { createRoot } from "react-dom/client";
 import { createProductController } from "./controller.js";
@@ -60,16 +61,16 @@ function App() {
             onBookings={() => product.navigate("bookings")}
           />
         )}
-        {s.page === "bookings" && (
-          <Bookings
-            key={s.search || "all"}
-            initialQuery={s.search || ""}
+        {(s.page === "bookings" || s.page === "detail") && (
+          <ManagementWorkspace
             session={s.session}
+            initialBooking={s.page === "detail" ? s.detail : null}
+            initialQuery={s.search || ""}
+            onSession={product.replaceSession}
             onNew={product.startBooking}
-            onOpen={product.openBooking}
           />
         )}
-        {s.page === "financials" && <Financials session={s.session} />}
+        {s.page === "financials" && <Financials session={s.session} onOpen={product.openBooking} />}
         {s.page === "booking" && (
           <BookingWizard
             key={s.session.id}
@@ -79,12 +80,6 @@ function App() {
             onSave={product.saveDraft}
             onConfirm={product.confirm}
             busy={s.busy}
-          />
-        )}
-        {s.page === "detail" && (
-          <BookingDetail
-            booking={s.detail}
-            onBack={() => product.navigate("bookings")}
           />
         )}
         {s.page === "confirmation" && (

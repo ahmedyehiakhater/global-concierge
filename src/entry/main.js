@@ -1,3 +1,5 @@
+import { createArtifactViewer } from "../artifacts/viewer.jsx";
+import { bindBotArtifacts } from "../artifacts/bindBots.js";
 import * as THREE from "three";
 import { createBot, BOT_PRESETS, SpeechBubbles } from "../bots/index.js";
 import "./style.css";
@@ -31,6 +33,27 @@ function init() {
   scene.add(light);
   const bot = createBot(BOT_PRESETS.priya);
   scene.add(bot.root);
+  let artifactsOpen = false;
+  const artifactViewer = createArtifactViewer({
+    onOpen: () => {
+      artifactsOpen = true;
+    },
+    onClose: () => {
+      artifactsOpen = false;
+    },
+    onReset: () => reset.click(),
+  });
+  const unbindArtifacts = bindBotArtifacts({
+    element: renderer.domElement,
+    camera,
+    bots: [bot],
+    viewer: artifactViewer,
+  });
+  const artifactButton = document.createElement("button");
+  artifactButton.className = "utility entry-artifacts";
+  artifactButton.textContent = "Priya’s test cases";
+  artifactButton.onclick = () => artifactViewer.open("priya");
+  document.body.append(artifactButton);
   const bubbles = new SpeechBubbles({ container: stage, camera });
   bubbles.track(bot);
   let generation = 0,
@@ -62,7 +85,7 @@ function init() {
     if (disposed) return;
     const dt = Math.min(0.05, (now - last) / 1000);
     last = now;
-    bot.update(dt);
+    if (!artifactsOpen) bot.update(dt);
     bubbles.update();
     renderer.render(scene, camera);
     raf = requestAnimationFrame(frame);
@@ -180,6 +203,9 @@ function init() {
       stop();
       cancelAnimationFrame(raf);
       observer.disconnect();
+      unbindArtifacts();
+      artifactViewer.dispose();
+      artifactButton.remove();
       bubbles.dispose();
       bot.dispose();
       renderer.dispose();

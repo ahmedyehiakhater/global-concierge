@@ -371,3 +371,29 @@ test("vest is a curved torso wrap with two bands and no box panels", () => {
     bot.dispose();
   }
 });
+
+test("throw releases once after wind-up for every rig, and cancelled wind-up never releases", async () => {
+  for (const name of Object.keys(BOT_PRESETS)) {
+    const { bot, effects } = setup(name);
+    let releases = 0;
+    const action = bot.play("throw", { onRelease: () => releases++ });
+    step([bot], effects, 10);
+    assert.equal(releases, 0);
+    step([bot], effects, 160);
+    await action;
+    assert.equal(releases, 1);
+    finite(bot);
+    const controller = new AbortController();
+    const cancelled = bot.play("throw", {
+      signal: controller.signal,
+      onRelease: () => releases++,
+    });
+    const result = cancelled.catch((e) => e);
+    controller.abort();
+    step([bot], effects, 100);
+    await result;
+    assert.equal(releases, 1);
+    bot.dispose();
+    effects.dispose();
+  }
+});

@@ -7,6 +7,9 @@ export default defineConfig({
       input: {
         studio: resolve("index.html"),
         entry: resolve("entry.html"),
+        opening: resolve("opening.html"),
+        artifacts: resolve("artifacts.html"),
+        designs: resolve("design-preview.html"),
         product: resolve("product.html"),
         session: resolve("session.html"),
       },

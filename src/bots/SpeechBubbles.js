@@ -71,6 +71,7 @@ export class SpeechBubbles {
           button.type = "button";
           button.className = "gc-choice";
           button.textContent = choice.label;
+          button.disabled = !!choice.disabled;
           button.onclick = () => bot.dialogue.choose(choice.id, state.id);
           row.append(button);
         }
@@ -84,7 +85,9 @@ export class SpeechBubbles {
       };
       this.update();
       if (state.focus && state.choices)
-        card.querySelector(".gc-choice").focus({ preventScroll: true });
+        (card.querySelector(".gc-choice:not(:disabled)") || close).focus({
+          preventScroll: true,
+        });
       else if (hadFocus) close.focus({ preventScroll: true });
     });
     return () => this.untrack(bot);

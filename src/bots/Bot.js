@@ -16,6 +16,7 @@ export const ACTIONS = [
   "present",
   "beckon",
   "sweep",
+  "throw",
   "celebrate",
   "react",
 ];
@@ -25,6 +26,7 @@ const durations = {
   present: 1.8,
   beckon: 2,
   sweep: 1.4,
+  throw: 1.1,
   build: 1.1,
   type: 1.3,
   celebrate: 1.7,
@@ -244,6 +246,7 @@ export class Bot {
         "present",
         "beckon",
         "sweep",
+        "throw",
         "celebrate",
         "react",
       ].includes(name)
@@ -338,6 +341,19 @@ export class Bot {
         r.torso.position.x = 0.2 * lower * (1 - rise);
         handTarget = this.carryCenter().lerp(a.position, lower);
         a.reach = 1 - rise;
+      }
+      if (a.name === "throw") {
+        const wind = smooth(u / 0.52),
+          release = smooth((u - 0.52) / 0.15);
+        shoulder("right", u < 0.52 ? -2.8 * wind : -2.8 + 2.4 * release, -0.15);
+        r.arms.right.elbow.rotation.x = -0.8 * (1 - release);
+        shoulder("left", 0.25 * Math.sin(u * Math.PI), 0.2);
+        lean = -0.16 * wind + 0.28 * release * (1 - smooth((u - 0.75) / 0.25));
+        if (u >= 0.6 && !a.released) {
+          a.released = true;
+          r.root.updateMatrixWorld(true);
+          a.options.onRelease?.();
+        }
       }
       if (a.name === "build") {
         // Slow overhead wind-up, fast downward strike, recoil, then recovery.

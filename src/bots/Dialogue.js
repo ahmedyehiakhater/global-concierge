@@ -65,7 +65,11 @@ export class BotDialogue {
           "Choices require unique non-empty string IDs and labels",
         );
       ids.add(c.id);
-      return { id: c.id, label: c.label };
+      return {
+        id: c.id,
+        label: c.label,
+        ...(c.disabled ? { disabled: true } : {}),
+      };
     });
     return new Promise((resolve) => this.open(text, options, copy, resolve));
   }
@@ -74,7 +78,7 @@ export class BotDialogue {
     if (
       !state ||
       state.id !== revision ||
-      !state.choices?.some((c) => c.id === id)
+      !state.choices?.some((c) => c.id === id && !c.disabled)
     )
       return false;
     this.close(id);

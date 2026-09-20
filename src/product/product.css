@@ -1073,7 +1073,91 @@ small {
   scroll-margin-top: 185px;
 }
 
-.add-flight-action {margin: 8px 0 32px;}
-.add-flight-action .button {min-height: 50px;padding: 12px 24px;font-size: 15px;font-weight: 700;gap: 10px;}
-.add-flight-action .button:hover:not(:disabled) {box-shadow: 0 4px 12px var(--shadow);filter: brightness(.96);}
-.add-flight-plus {font-size: 24px;line-height: 1;}
+.add-flight-action {
+  margin: 8px 0 32px;
+}
+.add-flight-action .button {
+  min-height: 50px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 700;
+  gap: 10px;
+}
+.add-flight-action .button:hover:not(:disabled) {
+  box-shadow: 0 4px 12px var(--shadow);
+  filter: brightness(0.96);
+}
+.add-flight-plus {
+  font-size: 24px;
+  line-height: 1;
+}
+.manage-service {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  margin: 4px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.badge.cancelled {
+  background: var(--surface);
+  color: var(--text-muted);
+  border: 1px dashed var(--text-muted);
+}
+.badge.confirmed {
+  border: 1px solid var(--brand-primary);
+}
+.status-fault .badge.cancelled {
+  background: var(--brand-primary);
+  color: var(--surface-raised);
+  border: 1px solid var(--brand-primary);
+}
+.management .notice {
+  padding: 14px;
+  border: 2px dashed var(--brand-primary);
+  border-radius: 12px;
+}
+.management [data-manage] {
+  margin-bottom: 20px;
+}
+
+.arrive-banner {
+  position: absolute;
+  top: 64px;
+  right: 20px;
+  box-sizing: border-box;
+  height: 52px;
+  max-width: calc(100% - 24px);
+  padding: 6px 12px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-top: 0;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 12px var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  color: var(--text-muted);
+  pointer-events: none;
+  z-index: 1;
+}
+.arrive-banner img {
+  width: 45px;
+  height: 34px;
+  object-fit: contain;
+}
+.main {
+  padding-top: 68px;
+}
+@media (max-width: 700px) {
+  .arrive-banner {
+    right: 12px;
+    gap: 5px;
+    font-size: 8px;
+  }
+}
+
+.arrive-banner strong { color: var(--text-primary); font-weight: 700; }
+.arrive-banner > span { white-space: nowrap; }

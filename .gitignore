@@ -4,3 +4,6 @@ dist/
 *.log
 
 data/
+
+releases/*
+!releases/Global-Concierge-Windows-x64.zip

@@ -1,0 +1,180 @@
+@import "../../references/designs/shared/tokens.css";
+.artifact-dialog {
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  width: min(1100px, 94vw);
+  max-width: 94vw;
+  height: min(850px, 92dvh);
+  max-height: 92dvh;
+  background: var(--surface-raised);
+  color: var(--text-primary);
+  font:
+    15px/1.65 Arial,
+    sans-serif;
+  box-shadow: 0 24px 90px var(--shadow);
+}
+.artifact-dialog::backdrop {
+  background: color-mix(in srgb, var(--text-primary) 44%, transparent);
+  backdrop-filter: blur(3px);
+}
+.artifact-layout {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.artifact-layout > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--border);
+}
+.artifact-layout h1 {
+  margin: 0;
+  font-size: 23px;
+}
+.artifact-eyebrow {
+  color: var(--brand-primary);
+  font-size: 12px;
+  font-weight: 700;
+}
+.artifact-close {
+  font-size: 28px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 4px 14px;
+  cursor: pointer;
+}
+.artifact-body {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 0;
+  flex: 1;
+}
+.artifact-body nav {
+  padding: 20px;
+  background: var(--surface);
+  overflow: auto;
+}
+.artifact-body nav > p {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.artifact-body nav button {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  text-align: left;
+  font: inherit;
+  border: 1px solid var(--brand-primary);
+  background: var(--surface-raised);
+  border-radius: 12px;
+  cursor: pointer;
+}
+.artifact-body nav small {
+  display: block;
+  font-size: 12px;
+  margin-top: 5px;
+}
+.artifact-body article {
+  overflow: auto;
+  padding: 28px 36px;
+  min-width: 0;
+}
+.artifact-body h2 {
+  font-size: 26px;
+  line-height: 1.25;
+  margin: 18px 0 28px;
+}
+.artifact-body h3 {
+  font-size: 16px;
+  margin: 22px 0 6px;
+}
+.artifact-body p {
+  margin: 8px 0;
+}
+.artifact-body li {
+  margin: 8px 0;
+}
+.artifact-body ul {
+  padding-left: 22px;
+}
+.artifact-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.artifact-meta span {
+  background: var(--surface);
+  border-radius: 6px;
+  padding: 3px 8px;
+}
+.artifact-body a {
+  color: var(--brand-primary);
+  font-size: 13px;
+}
+.design-previews {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.design-thumb {
+  height: 175px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  position: relative;
+  background: var(--surface-raised);
+}
+.design-thumb iframe {
+  width: 1200px;
+  height: 800px;
+  transform: scale(0.22);
+  transform-origin: top left;
+  border: 0;
+  pointer-events: none;
+}
+.test-cases section {
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: 12px;
+  margin: 14px 0;
+}
+.test-cases h3 {
+  margin-top: 8px;
+}
+.artifact-dialog button:focus-visible,
+.artifact-dialog a:focus-visible {
+  outline: 3px solid var(--brand-primary);
+  outline-offset: 3px;
+}
+@media (max-width: 700px) {
+  .artifact-body {
+    grid-template-columns: 1fr;
+  }
+  .artifact-body nav {
+    display: none;
+  }
+  .artifact-body article {
+    padding: 22px;
+  }
+  .design-previews {
+    grid-template-columns: 1fr;
+  }
+  .artifact-layout > header {
+    padding: 16px;
+  }
+}
+.artifact-reset {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-raised);
+  color: var(--text-muted);
+  padding: 8px 12px;
+  margin-right: 10px;
+  cursor: pointer;
+}

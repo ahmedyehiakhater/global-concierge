@@ -86,3 +86,15 @@ test("speech subscriptions receive replacement and clear events and unsubscribe 
   d.dismiss();
   assert.deepEqual(seen, [null, "A", null, "B"]);
 });
+
+test("shipped choices cannot be selected and keep available choices usable", async () => {
+  const d = new BotDialogue();
+  const answer = d.ask("Build?", [
+    { id: "old", label: "Shipped", disabled: true },
+    { id: "new", label: "Build" },
+  ]);
+  assert.equal(d.choose("old"), false);
+  assert.equal(d.current.choices[0].disabled, true);
+  assert.equal(d.choose("new"), true);
+  assert.equal(await answer, "new");
+});

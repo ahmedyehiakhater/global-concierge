@@ -39,3 +39,20 @@ No real login, traveller PII, card collection, supplier reservations or payments
 ## Checks
 
 `npm test` includes persistence after database reopening, atomic archival reset, duplicate request protection, HTTP cookie handling, stale requests, origin checks and insufficient credit. The real browser verification confirmed a saved booking and feature survive reload, and reset returns to an empty session with the starting facility.
+
+### Scripted booking drafts
+
+The booth uses `POST /api/session/rehearsal-draft` and `POST /api/bookings/rehearsal`
+with the same origin/session/idempotency rules as regular writes. The separate
+`rehearsal_drafts` table preserves the attendee's normal saved draft. Rehearsal bookings
+are real records in the local PoC ledger; confirmation clears only the rehearsal draft.
+Reset archives the session and both draft namespaces. It never deletes the database.
+
+Management endpoints:
+- POST /api/bookings/quote: bookingId, version, payload; returns authoritative proposed totals/difference.
+- POST /api/bookings/amend: same fields plus Idempotency-Key; commits one versioned change.
+- POST /api/bookings/cancel: bookingId, version plus Idempotency-Key; marks Cancelled and returns the current charge once.
+
+Original booking rows stay immutable for creation retries. booking_state stores the
+current payload/status/version/history, and management_requests binds a key to an
+operation. All writes use the active-session boundary and atomic SQLite transactions.

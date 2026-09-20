@@ -1,0 +1,93 @@
+@import "../../references/designs/shared/tokens.css";
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--surface-raised);
+  color: var(--text-primary);
+  font:
+    15px/1.5 Arial,
+    sans-serif;
+}
+.workspace-header {
+  padding: 42px 6vw 0;
+}
+.workspace-header > span {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--brand-primary);
+  font-weight: 700;
+}
+.workspace-header h1 {
+  font-size: clamp(24px, 3vw, 38px);
+  margin: 12px 0;
+}
+.workspace-header p {
+  color: var(--text-muted);
+}
+#team-stage {
+  width: 100%;
+  height: clamp(220px, 30vw, 400px);
+}
+#team-stage canvas {
+  display: block;
+}
+#team-roles {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin: 0 6vw 35px;
+}
+#team-roles button {
+  font: inherit;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 12px;
+  text-align: left;
+  cursor: pointer;
+}
+#team-roles button:hover {
+  background: var(--brand-subtle);
+  border-color: var(--brand-primary);
+}
+#team-roles b,
+#team-roles span,
+#team-roles small {
+  display: block;
+}
+#team-roles b {
+  font-size: 18px;
+}
+#team-roles span {
+  color: var(--brand-primary);
+  margin: 4px 0;
+}
+#team-roles small {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+footer {
+  padding: 0 6vw 30px;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+a {
+  color: var(--brand-primary);
+}
+button:focus-visible {
+  outline: 3px solid var(--brand-primary);
+  outline-offset: 3px;
+}
+@media (max-width: 650px) {
+  #team-roles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  #team-roles button:last-child {
+    grid-column: 1/-1;
+  }
+  .workspace-header {
+    padding-top: 28px;
+  }
+}

@@ -1,6 +1,8 @@
 // Reusable boundary for the product and future scene controller. Money is integer fils.
-let expectedSession;
+let expectedSession,
+  requestEpoch = 0;
 async function request(path, body, key) {
+  const epoch = ++requestEpoch;
   const response = await fetch(`/api/${path}`, {
     credentials: "same-origin",
     ...(body === undefined
@@ -26,13 +28,18 @@ async function request(path, body, key) {
     error.status = response.status;
     throw error;
   }
-  if (result.id) expectedSession = result.id;
+  if (result.id && epoch === requestEpoch) expectedSession = result.id;
   return result;
 }
 export const sessionApi = {
   load: () => request("session"),
+  quoteAmend: (body) => request("bookings/quote",body),
+  amend: (body,key) => request("bookings/amend",body,key),
+  cancelBooking: (body,key) => request("bookings/cancel",body,key),
   saveDraft: (draft) => request("session/draft", draft),
   completeFeature: (feature) => request("session/features", { feature }),
+  saveRehearsalDraft: (draft) => request("session/rehearsal-draft", draft),
+  bookRehearsal: (booking, key) => request("bookings/rehearsal", booking, key),
   book: (booking, key) => request("bookings", booking, key),
   reset: (key) => request("session/reset", {}, key),
 };

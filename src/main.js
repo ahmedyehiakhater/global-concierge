@@ -1,3 +1,5 @@
+import {createArtifactViewer} from "./artifacts/viewer.jsx";
+import {bindBotArtifacts} from "./artifacts/bindBots.js";
 import { SpeechBubbles } from "./bots/index.js";
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
@@ -391,3 +393,8 @@ talkPanel.append(heading, speechInput, talkButtons);
 document
   .querySelector("aside")
   .insertBefore(talkPanel, document.querySelector("#sequence"));
+
+const artifactViewer=createArtifactViewer();
+const unbindArtifacts=bindBotArtifacts({element:renderer.domElement,camera,bots,viewer:artifactViewer,enabled:()=>!placingCloud});
+const artifactButton=document.createElement("button");artifactButton.textContent="Read selected bot’s artefacts";artifactButton.onclick=()=>artifactViewer.open(names[selected]);talkPanel.append(artifactButton);
+if(import.meta.hot)import.meta.hot.dispose(()=>{unbindArtifacts();artifactViewer.dispose();});

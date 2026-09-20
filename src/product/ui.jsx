@@ -1,4 +1,6 @@
 import React from "react";
+import arriveLogo from "../assets/arrive.svg";
+import { featureAvailable } from "../../shared/features.js";
 import logo from "../../references/designs/shared/dnata-logo.svg";
 import {
   money,
@@ -30,9 +32,9 @@ export function Button({ children, secondary = false, ...props }) {
     </button>
   );
 }
-export function Card({ title, children, className = "" }) {
+export function Card({ title, children, className = "", ...props }) {
   return (
-    <section className={"card " + className}>
+    <section className={"card " + className} {...props}>
       {title && <h2>{title}</h2>}
       {children}
     </section>
@@ -70,10 +72,25 @@ export function Empty({ title, children, onCreate }) {
     </Card>
   );
 }
-export function Shell({ page, onNavigate, onNew, onReset, busy, children }) {
+export function Shell({
+  page,
+  onNavigate,
+  onNew,
+  onReset,
+  busy,
+  children,
+  availableFeatures,
+}) {
+  const allowed = (feature) => featureAvailable(availableFeatures, feature);
+  const navigate = (...args) => {
+    if (!busy && allowed(args[0])) onNavigate(...args);
+  };
   const [search, setSearch] = React.useState("");
   const nav = [
     ["dashboard", "Dashboard", LayoutDashboard],
+    ...(availableFeatures?.includes("booking")
+      ? [["booking", "New Booking", Plus]]
+      : []),
     ["marketplace", "Marketplace", Store],
     ["bookings", "Bookings", CalendarDays],
     ["financials", "Financials", Wallet],
@@ -89,7 +106,7 @@ export function Shell({ page, onNavigate, onNew, onReset, busy, children }) {
           href="#dashboard"
           onClick={(e) => {
             e.preventDefault();
-            onNavigate("dashboard");
+            navigate("dashboard");
           }}
         >
           <img src={logo} alt="dnata" />
@@ -98,7 +115,7 @@ export function Shell({ page, onNavigate, onNew, onReset, busy, children }) {
           className="search"
           onSubmit={(e) => {
             e.preventDefault();
-            onNavigate("bookings", search);
+            navigate("bookings", search);
           }}
         >
           <Search size={20} aria-hidden="true" />
@@ -107,21 +124,26 @@ export function Shell({ page, onNavigate, onNew, onReset, busy, children }) {
             placeholder="Search bookings…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            disabled={busy}
+            disabled={busy || !allowed("bookings")}
           />
-          <button className="search-submit" disabled={busy} type="submit">
+          <button
+            className="search-submit"
+            disabled={busy || !allowed("bookings")}
+            type="submit"
+          >
             Search
           </button>
         </form>
         <div className="header-actions">
-          <Button onClick={onNew} disabled={busy}>
+          <Button onClick={onNew} disabled={busy || !allowed("booking")}>
             <Plus size={18} aria-hidden="true" /> New Booking
           </Button>
           <button
             className="icon"
             title="Notifications are shown on Dashboard"
-            onClick={() => onNavigate("dashboard")}
+            onClick={() => navigate("dashboard")}
             aria-label="Notifications"
+            disabled={busy || !allowed("dashboard")}
           >
             <Bell size={20} aria-hidden="true" />
           </button>
@@ -136,12 +158,17 @@ export function Shell({ page, onNavigate, onNew, onReset, busy, children }) {
           <button
             className="avatar"
             title="Demo account: Sarah Jenkins"
-            onClick={() => onNavigate("dashboard")}
+            onClick={() => navigate("dashboard")}
           >
             SJ
           </button>
         </div>
       </header>
+      <div className="arrive-banner">
+        <span>Powered by <strong>ARRIVE</strong></span>
+        <img src={arriveLogo} alt="" aria-hidden="true" />
+        <span>Emirates Group IT Technology</span>
+      </div>
       <aside className="sidebar">
         <div className="workspace">
           <span className="eyebrow">AGENT PORTAL</span>
@@ -149,25 +176,36 @@ export function Shell({ page, onNavigate, onNew, onReset, busy, children }) {
           <small>Premium Concierge</small>
         </div>
         <nav aria-label="Primary navigation">
-          {nav.map(([key, label, Icon]) => (
-            <button
-              key={key}
-              disabled={
-                busy || !["dashboard", "bookings", "financials"].includes(key)
-              }
-              aria-current={
-                page === key ||
-                (key === "bookings" &&
-                  ["booking", "detail", "confirmation"].includes(page))
-                  ? "page"
-                  : undefined
-              }
-              onClick={() => onNavigate(key)}
-            >
-              <Icon size={21} aria-hidden="true" />
-              {label}
-            </button>
-          ))}
+          {nav
+            .filter(
+              ([key]) =>
+                availableFeatures == null ||
+                key === "dashboard" ||
+                allowed(key),
+            )
+            .map(([key, label, Icon]) => (
+              <button
+                key={key}
+                data-page={key}
+                disabled={
+                  busy ||
+                  !allowed(key) ||
+                  !["dashboard", "booking", "bookings", "financials"].includes(
+                    key,
+                  )
+                }
+                aria-current={
+                  page === key ||
+                  (key === "bookings" && ["detail"].includes(page))
+                    ? "page"
+                    : undefined
+                }
+                onClick={() => navigate(key)}
+              >
+                <Icon size={21} aria-hidden="true" />
+                {label}
+              </button>
+            ))}
         </nav>
         <div className="sidebar-bottom">
           <span className="badge">Fursa Tek · Local demo</span>
@@ -187,7 +225,14 @@ export function BookingRows({ bookings, onOpen }) {
         <Card key={b.id}>
           <div className="split">
             <small className="muted">GC-{b.id.slice(0, 8).toUpperCase()}</small>
-            <span className="badge">Confirmed · demo</span>
+            <span
+              className={
+                "badge " +
+                (b.status === "cancelled" ? "cancelled" : "confirmed")
+              }
+            >
+              {b.status === "cancelled" ? "Cancelled" : "Confirmed"} · demo
+            </span>
           </div>
           <h3>{route(b)}</h3>
           <b>
@@ -201,7 +246,7 @@ export function BookingRows({ bookings, onOpen }) {
           </p>
           <div className="split">
             <strong>{money(b.total)}</strong>
-            <Button secondary onClick={() => onOpen(b)}>
+            <Button secondary disabled={!onOpen} onClick={() => onOpen?.(b)}>
               View booking
             </Button>
           </div>
@@ -224,7 +269,15 @@ export function BookingDetail({ booking: b, onBack }) {
           <span className="eyebrow">GC-{b.id.slice(0, 8).toUpperCase()}</span>
           <h1>Booking details</h1>
           <p>
-            {route(b)} · <span className="badge">Confirmed · demo</span>
+            {route(b)} ·{" "}
+            <span
+              className={
+                "badge " +
+                (b.status === "cancelled" ? "cancelled" : "confirmed")
+              }
+            >
+              {b.status === "cancelled" ? "Cancelled" : "Confirmed"} · demo
+            </span>
           </p>
         </div>
         <Button secondary onClick={onBack}>
@@ -282,7 +335,9 @@ export function BookingDetail({ booking: b, onBack }) {
             <b>− {money(b.discount)}</b>
           </div>
           <div className="line total">
-            <span>Credit deducted</span>
+            <span>
+              {b.status === "cancelled" ? "Credit returned" : "Credit deducted"}
+            </span>
             <strong>{money(b.total)}</strong>
           </div>
           <p className="muted">

@@ -28,9 +28,9 @@ The visitor chooses what gets built. The agents build it in front of them.
 - On completion the menu does **not** reappear. The Product agent (Nour) goes into an
   attention-seeking idle — waving, pulse ring, a prompt after ~3s. The visitor clicks
   her to re-open the menu.
-- **Reset button**: the agents dismantle the app — sweeping, carrying blocks off,
-  screen empties. ~5–8s. Returns to the start state.
-- **Fallback**: no interaction for 45s → auto-reset to attract state.
+- **Reset button**: all five agents throw cartoon bombs; the visible app fragments and clears.
+  Returns to Nour’s welcome. Cancels in-progress work; no duplicate reset requests.
+- **Reset is manual only**: never reset for inactivity.
 
 This is **not** a passive video loop. Earlier drafts said "unattended and looping" —
 that is wrong and superseded.
@@ -138,8 +138,7 @@ me" idle — she's what the visitor clicks to re-open the feature menu.
 **Priya is the comic relief.** The QA bug-discovery beat is the funniest moment in the
 demo and deserves its own choreography.
 
-**Sami sweeps** on reset. Teardown reads better as the delivery manager clearing the
-floor than the engineer destroying his own work.
+**All five throw cartoon bombs** on manual reset; a playful demolition clears the app.
 
 ### Screen expressions
 

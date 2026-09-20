@@ -1,4 +1,6 @@
+import { financialValues } from "../../shared/financials.js";
 import React, { useState } from "react";
+import { featureAvailable, dashboardValues } from "../../shared/features.js";
 import {
   Card,
   Metric,
@@ -92,11 +94,21 @@ export function Login({ onEnter, busy }) {
     </div>
   );
 }
-export function Dashboard({ session, onNew, onOpen, onBookings }) {
-  const b = session.bookings;
+export function Dashboard({
+  session,
+  onNew,
+  onOpen,
+  onBookings,
+  availableFeatures,
+  servicesBookings = session.bookings,
+}) {
+  const b = session.bookings.filter((b) => b.status !== "cancelled");
+  const values = dashboardValues(session);
+  const canBook = featureAvailable(availableFeatures, "booking");
+  const canManage = featureAvailable(availableFeatures, "bookings");
   return (
     <>
-      <Card className="welcome">
+      <Card className="welcome" data-dashboard="welcome">
         <span className="eyebrow">YOUR DNATA WORKSPACE</span>
         <h1>Welcome back, Sarah.</h1>
         <p>
@@ -106,56 +118,72 @@ export function Dashboard({ session, onNew, onOpen, onBookings }) {
         </p>
       </Card>
       {session.draft && (
-        <Card title="Your saved booking draft">
+        <Card title="Your saved booking draft" data-dashboard="draft">
           <p className="muted">
             {route(session.draft)} · {session.draft.adults} adults · Pick up
             where you left off.
           </p>
-          <Button secondary onClick={onNew}>
+          <Button secondary disabled={!canBook} onClick={onNew}>
             Resume saved booking
           </Button>
         </Card>
       )}
-      <div className="metrics">
-        <Metric label="Active bookings" value={b.length} />
-        <Metric
-          label="Corporate savings"
-          value={money(b.reduce((s, b) => s + b.discount, 0))}
-        />
-        <Metric
-          label="Available credit"
-          value={money(session.credit.available)}
-        />
+      <div className="metrics" data-dashboard="metrics">
+        <Metric label="Active bookings" value={values.bookings} />
+        <Metric label="Corporate savings" value={money(values.savings)} />
+        <Metric label="Available credit" value={money(values.credit)} />
       </div>
       <div className="columns">
-        <div>
+        <div data-dashboard="services">
           <div className="heading compact">
             <h2>Active services</h2>
-            <Button secondary onClick={onBookings}>
+            <Button secondary disabled={!canManage} onClick={onBookings}>
               View all bookings →
             </Button>
           </div>
-          {b.length ? (
-            <BookingRows bookings={b.slice(-2)} onOpen={onOpen} />
+          {servicesBookings.filter((b) => b.status !== "cancelled").length ? (
+            <BookingRows
+              bookings={servicesBookings
+                .filter((b) => b.status !== "cancelled")
+                .slice(-2)}
+              onOpen={canManage ? onOpen : undefined}
+            />
           ) : (
-            <Empty title="No active bookings yet" onCreate={onNew}>
+            <Empty
+              title="No active bookings yet"
+              onCreate={canBook ? onNew : undefined}
+            >
               Your confirmed bookings and services will appear here.
             </Empty>
           )}
         </div>
-        <Card title="Notifications">
-          {b.length ? (
-            [...b]
+        <Card title="Notifications" data-dashboard="notifications">
+          {session.bookings.length ? (
+            [...session.bookings]
               .reverse()
               .slice(0, 4)
               .map((item) => (
                 <div className="notification" key={item.id}>
-                  <b>Booking confirmed</b>
+                  <b>
+                    Booking{" "}
+                    {item.status === "cancelled"
+                      ? "cancelled"
+                      : item.version > 1
+                        ? "updated"
+                        : "confirmed"}
+                  </b>
                   <p>
-                    {route(item)} · {money(item.total)} deducted from corporate
-                    credit.
+                    {route(item)} · {money(item.total)}{" "}
+                    {item.status === "cancelled"
+                      ? "returned to"
+                      : "current charge against"}{" "}
+                    corporate credit.
                   </p>
-                  <small>{new Date(item.created).toLocaleString()}</small>
+                  <small>
+                    {new Date(
+                      item.history?.at(-1)?.at || item.created,
+                    ).toLocaleString()}
+                  </small>
                 </div>
               ))
           ) : (
@@ -212,46 +240,33 @@ export function Bookings({ session, onNew, onOpen, initialQuery = "" }) {
     </>
   );
 }
-export function Financials({ session }) {
-  const b = session.bookings;
-  const gross = b.reduce((s, b) => s + b.subtotal, 0),
-    savings = b.reduce((s, b) => s + b.discount, 0);
-  const values = [
-    0,
-    ...b.map((_, i) => b.slice(0, i + 1).reduce((s, b) => s + b.total, 0)),
-  ];
-  const max = Math.max(100000, ...values);
-  const points = values
-    .map(
-      (v, i) =>
-        `${40 + (i * 560) / Math.max(1, values.length - 1)},${220 - (v / max) * 180}`,
-    )
-    .join(" ");
-  const counts = new Map();
-  for (const booking of b)
-    for (const key of booking.services) {
-      const service = serviceInfo(key),
-        context = selectionContext(key, booking.legs);
-      const label = [context.airport, context.direction, service?.name]
-        .filter(Boolean)
-        .join(" · ");
-      counts.set(label, (counts.get(label) || 0) + 1);
-    }
-  const popular = [...counts]
-    .map(([label, count]) => ({ label, count }))
-    .sort((a, b) => b.count - a.count);
+export function Financials({
+  session,
+  axisFault = false,
+  onOpen,
+  availableFeatures,
+}) {
+  const v = financialValues(session),
+    canManage = featureAvailable(availableFeatures, "bookings") && !!onOpen;
+  const max = Math.max(100000, ...v.values),
+    points = v.values
+      .map(
+        (value, i) =>
+          `${40 + (i * 560) / Math.max(1, v.values.length - 1)},${220 - (value / max) * 180}`,
+      )
+      .join(" ");
   return (
     <>
-      <div className="heading">
+      <div className="heading" data-financial="heading">
         <div>
           <h1>Financials & Insights</h1>
-          <p>Corporate credit position and this visitor’s booking activity.</p>
+          <p>Corporate credit and the activity behind every balance.</p>
         </div>
         <span className="badge">AED · Current session</span>
       </div>
-      <Card title="Corporate credit facility">
+      <Card title="Corporate credit facility" data-financial="credit">
         <p className="muted">
-          Global Travel Partners · Active · illustrative terms
+          Global Travel Partners · Illustrative PoC facility
         </p>
         <div className="metrics">
           <Metric label="Credit limit" value={money(session.credit.limit)} />
@@ -262,44 +277,58 @@ export function Financials({ session }) {
           />
         </div>
         <p className="fine">
-          Every session starts with AED 100,000 and zero usage. Confirmed
-          bookings have deducted {money(gross - savings)}. Corporate discount:{" "}
-          {session.discountPercent}%.
+          Starts at AED 100,000 with zero opening usage. Bookings consume
+          credit; confirmed reductions and cancellations return it.
         </p>
       </Card>
-      <div className="metrics">
-        <Metric label="Gross booking value" value={money(gross)} />
-        <Metric label="Corporate discount savings" value={money(savings)} />
-        <Metric label="Total bookings" value={b.length} />
+      <div className="metrics" data-financial="metrics">
+        <Metric
+          label="Active booking value · before discount"
+          value={money(v.gross)}
+        />
+        <Metric label="Savings on active bookings" value={money(v.savings)} />
+        <Metric label="Active bookings" value={v.active} />
       </div>
       <div className="columns">
-        <Card title="Booking Value Trend">
+        <Card title="Booking Value Trend" data-financial="trend">
           <p className="fine">
-            Cumulative net credit deductions · this visitor
+            Cumulative net credit used · each point is a saved transaction, not
+            a calendar interval.
           </p>
           <svg
             className="chart"
             viewBox="0 0 640 260"
             role="img"
-            aria-label={`Cumulative net booking value ${money(gross - savings)}`}
+            aria-label={`Cumulative net credit used ${money(v.net)}`}
           >
             <line x1="40" x2="600" y1="220" y2="220" />
-            <text x="40" y="245">
-              Start · AED 0
+            <text data-financial-axis x="40" y="245">
+              Start · {axisFault ? "USD" : "AED"} 0
             </text>
-            <text x="600" y="30" textAnchor="end">
-              {money(gross - savings)}
+            <text data-financial-axis x="600" y="30" textAnchor="end">
+              {axisFault ? money(max).replace("AED", "USD") : money(max)}
             </text>
             <polyline
-              points={values.length === 1 ? "40,220 600,220" : points}
+              points={v.values.length === 1 ? "40,220 600,220" : points}
             />
           </svg>
-          {!b.length && <p className="muted">No booking activity yet.</p>}
+          {!v.events.length ? (
+            <p>No booking activity yet. Ready for the first booking.</p>
+          ) : (
+            <p>
+              {v.events.length} saved transactions · net credit used{" "}
+              {money(v.net)}
+            </p>
+          )}
         </Card>
-        <Card title="Most booked services">
-          {popular.length ? (
-            popular.map((s, i) => (
-              <div className="notification" key={i}>
+        <Card title="Most booked services" data-financial="insights">
+          <p className="fine">
+            Selections across active bookings, not traveller counts. Cancelled
+            bookings are excluded.
+          </p>
+          {v.popular.length ? (
+            v.popular.map((s) => (
+              <div className="notification" key={s.label}>
                 <b>{s.label}</b>
                 <p>
                   {s.count} service selection{s.count === 1 ? "" : "s"}
@@ -307,12 +336,57 @@ export function Financials({ session }) {
               </div>
             ))
           ) : (
-            <p className="muted">
-              Your most popular services will appear after the first booking.
+            <p>
+              {v.events.length
+                ? "No active service selections. Previous transactions remain in the history below."
+                : "Service insights will appear after the first booking."}
             </p>
           )}
         </Card>
       </div>
+      <Card title="Transaction history" data-financial="history">
+        <div className="metrics">
+          <Metric label="Credit charged" value={money(v.charges)} />
+          <Metric label="Credit returned" value={money(v.returns)} />
+          <Metric label="Net credit used" value={money(v.net)} />
+        </div>
+        {v.events.length ? (
+          <div className="financial-transactions">
+            {[...v.events].reverse().map((e, i) => (
+              <div
+                className="line"
+                data-transaction
+                key={`${e.bookingId}-${e.index}`}
+              >
+                <span>
+                  <b>{e.reference}</b> · {e.kind}
+                  <br />
+                  <small>{new Date(e.at).toLocaleString()}</small>
+                </span>
+                <b>
+                  {e.delta < 0
+                    ? "Returned "
+                    : e.delta === 0
+                      ? "No charge change "
+                      : "Charged "}
+                  {money(Math.abs(e.delta))}
+                </b>
+                <Button
+                  secondary
+                  disabled={!canManage}
+                  onClick={() =>
+                    onOpen(session.bookings.find((b) => b.id === e.bookingId))
+                  }
+                >
+                  View booking
+                </Button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>No transactions yet. No sample charges have been added.</p>
+        )}
+      </Card>
     </>
   );
 }

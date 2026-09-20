@@ -710,3 +710,189 @@ The acceptance criteria above are a proposed starting point for refining togethe
 Test the jump height, button compression, stage spacing and group cleanup on the actual
 booth display before locking their timings. Timing changes must preserve readable
 bubbles, a visible design handoff and the final five-role review.
+
+## Inspecting agent artefacts
+
+Clicking a bot opens that agent’s work in a readable document viewer; provide an equivalent
+keyboard-accessible role control. Product owns briefs, Design owns screens and decisions,
+Engineering owns implementation notes, QA owns test cases/evidence, and Delivery owns
+scope, timeline and budget. Enlarge documents rather than expecting visitors to read props.
+Pause the running scene while the visitor reads; resume it on close without losing its
+place. Manual Reset remains available inside the reader and starts cleanup immediately.
+
+The `/artifacts.html` preparation workspace now demonstrates this viewer with opening
+milestone drafts. During the eventual scenario, only published work should appear as
+produced: each creation beat publishes a version and its prop carries the same artefact ID.
+QA cases remain Not run until real execution evidence exists. Budget and timeline estimates
+must be labelled, and the demo booking credit facility is never the delivery budget.
+
+### Opening staging revision — 20 September
+
+The opening product is now full-width and responsive, with only the bottom team/lifecycle
+strip reserved for the show. The login and workspace assemble as individual regions:
+Omar walks to each region, strikes to reveal it, and Priya visits that region before
+work advances. QA installs and presses the sample-data helper, then tests real login.
+The design board previews the actual shared components and stays above the canvas,
+with an enlargement control and the existing readable artefact drawer.
+
+Nour, Ellie and Sami support the current work from different positions. The team faces
+the work and gathers into a front-facing lineup for delivery only. Build and Test
+alternate on the bottom role strip; joint review highlights every role. This more
+explicit assembly takes longer than the original single-reveal opening.
+
+
+### Continuous construction and module reviews
+
+Supersedes the field-by-field opening reviews above. Omar builds continuously with
+repeated strikes and a progressive sharpening/wipe reveal. Only complete modules
+(login, header, sidebar, empty workspace) enter review. Design and QA review in parallel
+with subsequent construction; no approval gate between workspace modules. The real
+login test is the navigation dependency. Simultaneous jobs appear in the bottom strip.
+
+Brief and design access live in the reserved bottom production dock, not floating over
+the work. Nour hands the brief directly to Ellie's raised hand, with a visible shared
+grip and no floor pickup/placement. Bots use separated marks and avoid crossing through
+one another. Manual reset still interrupts every active job and clears the stage.
+
+### Compact production stage and visitor trial
+
+The lifecycle is a small shadowed floating dock, not a full-width footer. Brief/design
+previews live on the right, behind the bot and dialogue layers. The developer's work
+outline follows the target element's live rectangle without a header offset. Walks
+are direct, with limited spacing corrections rather than strict traffic queues.
+
+Each role now publishes product-specific documents incrementally: the master Global
+Concierge brief and product foundations, then the login/workspace PRD, design,
+implementation record, QA evidence and release report. Status follows actual scene
+milestones. QA runtime results require observed checks; manual cases remain Not run.
+
+Sami’s countdown is a milestone-adjusted estimate, never a scheduling gate.
+Work completion immediately sets it to zero and starts delivery; there is no
+wait to consume unused countdown time. Document reading and saving pause it.
+An expired estimate shows “Finishing release…” until the work actually completes.
+After shipping, restore the completed login with a blank form so the attendee can try
+it. Nour remains the feature-menu entry point; remove the duplicate completion panel.
+
+### Dashboard implementation revision — approved sequence
+
+Scene 1 follows the completed opening and is selected through Nour. Preserve the shell,
+visitor data, master product brief and all opening artefacts. Build four complete groups:
+Welcome (including a saved-draft card if present), Overview metrics, Active services,
+Notifications. One continuous construction sequence per group; no field-by-field reviews.
+Design and QA review independently while Engineering moves to the next group.
+
+Nour: “One place for travel agents and travel desks to see bookings, updates and credit.”
+Sami: “What are we shipping?” Nour: “The Global Concierge dashboard.”
+Omar: “Four panels. I’m on it.”
+
+Nour hands the Dashboard PRD to Ellie. Ellie explains the intentional first-visit state,
+publishes the actual Dashboard design, then hands the design to Omar. The reference stays
+on the right below bot/dialogue layers. Sami restarts an estimated countdown; no deadline
+wait is allowed. The two findings are welcome alignment (Design) and missing empty state
+(QA). They are corrected after Notifications completes. Findings and retests are retained
+in the feature documents. Saved bookings use a labelled QA-only empty-state preview and
+are restored before approval; bookings, draft and credit must remain unchanged.
+
+Sami connects the Dashboard stub, Priya jumps on it and exercises the real navigation.
+Booking/search/management actions remain gated until their own scenes ship. The team
+checks design, live data, feature availability and preservation before saving completion.
+Release returns to the interactive Dashboard immediately, counter zero, then celebration.
+Nour invites exploration without reopening the menu. Choosing an already-built Dashboard
+only opens it; the scene does not rerun. Reset interrupts all workers and performs the
+existing all-team cleanup. The other three feature scenes remain future work.
+
+### New Booking implementation revision
+
+Scene 2 builds complete groups: heading/step rail, Journey, persistent summary, Travellers,
+Services planner, Review, Credit facility and the saved Confirmation. The sample-data
+helpers are introduced by Priya per form step. She selects two adults, exercises missing
+flight number and malformed email states, then hops on departure/arrival and actual
+service checkboxes. Sample dates remain in the future rather than using a fixed date.
+
+Design logs and fixes missing completed-step ticks. Product logs the empty-looking
+commercial totals; Engineering restores the real calculated subtotal, discount and credit
+charge without changing pricing logic. The backend alone commits the final amount.
+Sami acknowledges credit and confirms exactly once. Retry uses the same request identity.
+An existing attendee draft is preserved in its own slot while the scene uses a rehearsal
+slot. Reset during saving archives any already-committed transaction with the old session
+and prevents stale callbacks from restoring the stage.
+
+If Dashboard exists, the bots navigate there and highlight its actual saved reference,
+updated savings and live credit. This connection never submits another booking. Artefacts
+are appended to the session's existing work. The countdown restarts, remains informational,
+and is never awaited. After approval the visitor receives a fresh editable Journey form.
+New Booking remains reachable from the header, released sidebar entry and Dashboard;
+management/financial scenes are still separate releases.
+
+
+### Dashboard dialogue branches — build order and saved data
+
+This overrides the unconditional “There are no bookings” comic beat above.
+The scene reads the released features for this run and the current backend snapshot.
+A feature flag alone must never imply that a confirmed booking exists.
+
+| Context | Requirements and design | QA finding and resolution | Handback |
+|---|---|---|---|
+| Dashboard first, no saved bookings | Introduce a workspace ready for future activity | Original missing-empty-state exchange; repair the message | Invite the visitor to choose the next feature |
+| Booking released, no saved bookings | Acknowledge the working booking flow, with no confirmed reservations yet | Empty-state check; creation/resume controls remain enabled | Invite the visitor to make a booking using the existing flow |
+| Saved bookings exist | Explicitly reference existing bookings, services and actual remaining credit | Show real records first. Priya announces an empty-state QA preview; Omar says the records are still saved. Repair the preview, then restore actual records and verify credit is unchanged | State that Dashboard now displays the bookings already made |
+
+All five feature artefacts record the selected branch and starting booking count.
+The temporary QA preview never changes the ledger. Reviews and continuous construction
+keep their existing concurrency; this is one scenario with contextual dialogue, not
+separate copies of the movement sequence.
+
+### Bookings & Manage — implemented scene and transaction contract
+
+The normal New Booking release saves a real booking; management acknowledges it.
+With no usable saved record, Priya introduces a labelled, temporary QA example.
+The script never amends/cancels a visitor record: its preview tests propose an added
+service, discard it, stage a card disappearing, restore it, inspect cancellation and
+choose Keep booking. The before/after business snapshot must match exactly.
+
+Build complete containers in sequence: list/search/filters; detail and history;
+management actions; status comparison and repair; full modification form; price review;
+restored details; cancellation decision; real-list handback and eligible navigation.
+Ellie reviews finished details while Omar builds actions. Dialogue, handoffs, continuous
+strikes, reset cancellation, live artefact publication and immediate timer completion
+use the shared scene system.
+
+The released product supports real, server-priced amendments and cancellations.
+Route/flight count/traveller count remain fixed; date/number, names/contact and eligible
+services can change. Show the difference before approval. Preserve immutable original
+creation requests plus versioned current state/history. Atomic request receipts prevent
+repeat charges/returns; stale edits and archived-session writes are rejected. Full
+cancellation credit is an illustrative PoC policy. The cancelled record stays visible.
+
+Dashboard active counts/savings exclude cancelled bookings. The management feature
+connects View all and detail entry points only after it is built. Normal booth use
+retains the booking created by the previous scene for Financials and later exploration.
+
+### Financials & Insights — implemented scene
+
+Use the saved transaction history and current credit snapshot. Branch dialogue into
+empty facility, existing charges, or activity including returns. Zero current usage
+with past events is not an empty account. No sample charges, reset of usage or real
+transaction is introduced by this read-only scene.
+
+Nour briefs Ellie; the actual design is handed to Omar. Complete build groups are:
+credit overview/metrics, trend, active-service insights, and transaction history.
+Priya reviews finished credit independently while construction continues. Ellie catches
+USD chart labels (display-only); Omar repairs both to AED. Priya reconciles event count,
+charges minus returns, chart endpoint, active-service counts and preserved business
+state. “Nothing new” means no new QA finding after the design fix, not no activity.
+
+Sami connects Financials navigation, and Priya hops on it and on a real transaction's
+booking link if Management is built. All five feature artefacts retain actual evidence.
+The counter finishes with work, then celebration and a usable Financials handback.
+If all other features are built, Nour acknowledges the platform; otherwise invite the
+next feature. Existing manual reset and reader pause continue to apply.
+
+When Booking is built after Financials, revisit credit/history after the actual save
+and verify its charge. Confirmed management changes refresh the shared snapshot,
+show the actual difference and offer the completed Financials view. No QA preview or
+cancelled edit triggers a fabricated ledger movement.
+
+
+## Final booth polish — manual demolition reset
+Reset cancels the active scene, dialogue and delivery timer immediately. All five bots take nearby throwing positions, hold cartoon bombs, wind up, and release them toward visible application sections. Curved flights cause dust, impact rings and page fragments. Temporary fragments are inert and disposed. Other bots leave; a fresh archived-session reset returns to Nour’s welcome. No inactivity reset. Repeated reset clicks do not repeat the archive operation; failed archive requests retain their idempotency key for retry. Feature choices are enabled only for unbuilt features; completed features read Shipped. The subtle ARRIVE banner uses a vector recreation of the supplied photograph, not an official brand asset.

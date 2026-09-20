@@ -1,0 +1,538 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background: var(--surface-raised);
+}
+#opening-ui {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+#opening-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+#opening-stage canvas {
+  display: block;
+  pointer-events: none;
+}
+.opening-logo {
+  position: absolute;
+  top: 24px;
+  left: 28px;
+  width: 105px;
+}
+.opening-controls {
+  position: fixed;
+  right: 18px;
+  bottom: 21px;
+  z-index: 30;
+  pointer-events: auto;
+}
+.opening-controls button,
+.opening-start {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-raised);
+  color: var(--brand-primary);
+  padding: 9px 13px;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  box-shadow: 0 3px 14px var(--shadow);
+}
+.build-area {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  pointer-events: none;
+}
+.build-area.live {
+  pointer-events: auto;
+}
+.opening-login,
+.opening-shell {
+  width: 100%;
+  min-height: 100dvh;
+  background: var(--surface-raised);
+}
+.opening-login .login {
+  min-height: 100dvh;
+}
+.opening-login .login-story,
+.opening-login .login-form > *,
+.opening-shell .topbar > *,
+.opening-shell .sidebar > .workspace,
+.opening-shell .sidebar > nav,
+.opening-shell .main > .card {
+  visibility: hidden;
+}
+.build-area [data-assembled="true"],
+.trial .login-story,
+.trial .login-form > *,
+.trial .topbar > *,
+.trial .sidebar > .workspace,
+.trial .sidebar > nav,
+.trial .main > .card {
+  visibility: visible !important;
+}
+.opening-shell {
+  position: relative;
+  min-height: 100dvh;
+  background: var(--surface);
+  overflow: hidden;
+}
+.opening-shell .topbar,
+.opening-shell .sidebar {
+  position: absolute;
+}
+.opening-shell .sidebar-bottom {
+  display: none;
+}
+.opening-shell.no-header .topbar,
+.opening-shell.no-rail .sidebar {
+  visibility: hidden;
+}
+.opening-team {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 3px;
+  padding: 6px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  box-shadow: 0 8px 32px var(--shadow);
+  pointer-events: auto;
+  width: min(620px, calc(100vw - 260px));
+}
+.opening-team button {
+  flex: 1;
+  min-width: 0;
+  padding: 7px 9px;
+  border: 0;
+  border-radius: 11px;
+  text-align: left;
+  font: inherit;
+  font-size: 11px;
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+.opening-team button > span {
+  display: block;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin-bottom: 3px;
+}
+.opening-team b {
+  display: inline;
+  font-size: 11px;
+}
+.opening-team small {
+  display: none;
+}
+.opening-team em {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 8px;
+  font-style: normal;
+  line-height: 1.2;
+  max-height: 10px;
+  margin-top: 2px;
+  color: var(--text-muted);
+}
+.opening-team em:empty {
+  display: none;
+}
+.opening-team button[aria-current] {
+  background: var(--brand-subtle);
+  color: var(--brand-primary);
+}
+.team-review {
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: var(--surface-raised);
+  border-radius: 9px;
+  padding: 5px 10px;
+  font-size: 10px;
+  color: var(--brand-primary);
+  box-shadow: 0 3px 14px var(--shadow);
+}
+/* Below the canvas: bots and their speech pass in front of this reference. */
+.document-dock {
+  position: fixed;
+  top: 132px;
+  right: 20px;
+  width: 210px;
+  height: auto;
+  padding: 12px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 5px 22px var(--shadow);
+  z-index: 3;
+  text-align: left;
+  pointer-events: auto;
+  cursor: pointer;
+  color: var(--text-primary);
+  font: inherit;
+  display: block;
+}
+.document-dock > span:last-child {
+  display: grid;
+  gap: 5px;
+  margin-top: 9px;
+}
+.document-dock small {
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+.document-dock b {
+  font-size: 14px;
+}
+.document-dock > span:last-child > span {
+  font-size: 11px;
+  color: var(--brand-primary);
+}
+.document-dock .board-preview {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  pointer-events: none;
+  background: var(--surface);
+}
+.document-dock iframe {
+  display: block;
+  transform-origin: top left;
+  pointer-events: none;
+  border: 0;
+}
+.document-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 58px;
+  background: var(--brand-subtle);
+  color: var(--brand-primary);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-size: 13px;
+}
+.work-outline {
+  position: fixed;
+  border: 2px dashed var(--brand-primary);
+  border-radius: 8px;
+  pointer-events: none;
+}
+.work-outline > span {
+  position: absolute;
+  bottom: 100%;
+  left: 7px;
+  background: var(--brand-primary);
+  color: var(--surface-raised);
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 10px;
+  white-space: nowrap;
+}
+.work-outline.label-below > span {
+  bottom: auto;
+  top: 100%;
+}
+.review-checks {
+  position: absolute;
+  top: 74px;
+  left: 255px;
+  right: 235px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  font-size: 11px;
+  color: var(--success);
+}
+.delivery-timer {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  padding: 6px 11px;
+  border-radius: 11px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  box-shadow: 0 3px 16px var(--shadow);
+  white-space: nowrap;
+  pointer-events: none;
+  text-align: center;
+}
+.delivery-timer small {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+.delivery-timer b {
+  display: block;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--brand-primary);
+  margin-top: 3px;
+}
+.opening-start {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 16px 24px;
+  background: var(--brand-action);
+  color: var(--action-ink);
+  font-weight: 700;
+  pointer-events: auto;
+}
+.opening-error {
+  position: absolute;
+  top: 85px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--error-subtle);
+  color: var(--error);
+  padding: 18px;
+  z-index: 30;
+  pointer-events: auto;
+}
+.opening-error button {
+  display: block;
+  margin-top: 10px;
+}
+.cleaning {
+  filter: saturate(0.6);
+}
+#opening-stage .gc-bubble {
+  width: 260px;
+  background: var(--surface-raised);
+  color: var(--text-primary);
+  border-color: var(--border);
+  font-size: 14px;
+  padding: 16px;
+  box-shadow: 0 8px 30px var(--shadow);
+}
+#opening-stage .gc-choices {
+  display: grid;
+}
+#opening-stage .gc-choice {
+  padding: 9px;
+  background: var(--surface);
+  color: var(--text-primary);
+}
+#opening-stage .gc-choice:not(:disabled) {
+  background: var(--brand-action);
+  color: var(--action-ink);
+  border-color: var(--brand-action);
+}
+#opening-stage .gc-speaker {
+  color: var(--brand-primary);
+}
+body:has(.opening-login) .opening-logo,
+body:has(.opening-shell) .opening-logo {
+  display: none;
+}
+@media (max-width: 700px) {
+  .opening-team {
+    left: 12px;
+    right: 106px;
+    transform: none;
+    bottom: 12px;
+    width: auto;
+    padding: 4px;
+    gap: 1px;
+  }
+  .opening-team button {
+    padding: 7px 4px;
+  }
+  .opening-team button > span {
+    font-size: 7px;
+    letter-spacing: 0;
+  }
+  .opening-team em {
+    display: none;
+  }
+  .opening-controls {
+    right: 10px;
+    bottom: 20px;
+  }
+  .opening-controls button {
+    padding: 8px;
+    font-size: 10px;
+  }
+  .document-dock {
+    right: 10px;
+    top: 132px;
+    width: 155px;
+    padding: 9px;
+  }
+  .document-dock b {
+    font-size: 12px;
+  }
+  .opening-login .login-form {
+    padding: 25px 25px 100px;
+  }
+  .opening-login .login-story {
+    padding: 24px;
+  }
+  .review-checks {
+    left: 70px;
+    right: 15px;
+    flex-wrap: wrap;
+    font-size: 10px;
+  }
+}
+
+/* New feature containers reveal as whole groups without rebuilding the shell. */
+.dashboard-stage [data-dashboard] {
+  visibility: hidden;
+}
+.dashboard-stage.complete [data-dashboard] {
+  visibility: visible;
+}
+.dashboard-stage.missing-empty [data-dashboard="services"] .empty > * {
+  visibility: hidden !important;
+}
+.dashboard-stage.alignment-issue [data-dashboard="welcome"] {
+  transform: translateY(8px);
+}
+.dashboard-stage.qa-preview [data-dashboard="services"]::before {
+  content: "QA preview · empty state · saved bookings unchanged";
+  display: block;
+  color: var(--brand-primary);
+  background: var(--brand-subtle);
+  padding: 6px 10px;
+  border-radius: 7px;
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+.dashboard-stage {
+  padding-bottom: 120px;
+}
+.feature-keyboard {
+  position: fixed;
+  left: -10000px;
+  top: 12px;
+  pointer-events: auto;
+}
+.feature-keyboard:focus {
+  left: 12px;
+  z-index: 50;
+  padding: 12px;
+}
+/* Booking choreography adds presentation layers; calculator and form validation stay real. */
+.booking-stage {
+  padding-bottom: 140px;
+}
+.booking-stage.staged [data-booking] {
+  visibility: hidden;
+}
+.booking-stage [data-assembled="true"] {
+  visibility: visible;
+}
+.booking-stage.hide-totals .summary-money b {
+  visibility: hidden !important;
+}
+.booking-stage.hide-totals .summary-money {
+  position: relative;
+}
+.booking-stage.hide-totals .summary-money::after {
+  content: "—";
+  position: absolute;
+  right: 0;
+  color: var(--text-primary);
+}
+.booking-stage.hide-totals .summary > .card > .fine:last-child {
+  visibility: hidden;
+}
+.booking-stage .booking-error {
+  visibility: visible;
+  background: var(--error-subtle);
+  color: var(--error);
+  padding: 12px;
+  border-radius: 10px;
+}
+.booking-confirmation.staged {
+  visibility: hidden;
+}
+.opening-shell .sidebar nav button {
+  display: flex;
+}
+
+.booking-error button {
+  pointer-events: auto;
+  margin-left: 12px;
+}
+
+/* Keep the actual field under test visible and identifiable. */
+.booking-stage [data-qa-field="active"] {
+  outline: 3px solid var(--brand-primary);
+  outline-offset: 10px;
+  border-radius: 8px;
+  scroll-margin-block: 180px;
+}
+
+.booking-stage [data-qa-result]::after {
+  content: attr(data-qa-result);
+  display: block;
+  padding-top: 8px;
+  color: var(--brand-primary);
+  font-size: 13px;
+  font-weight: 600;
+}
+.manage-stage.staged [data-manage] {
+  visibility: hidden;
+}
+.manage-stage.staged [data-manage][data-assembled="true"] {
+  visibility: visible;
+}
+.financial-stage.staged [data-financial] {
+  visibility: hidden;
+}
+.financial-stage.staged [data-financial][data-assembled="true"] {
+  visibility: visible;
+}
+.financial-transactions {
+  max-height: 400px;
+  overflow: auto;
+}
+
+#opening-stage .gc-choice:disabled {
+  opacity: 0.55;
+  cursor: default;
+  background: var(--surface);
+  color: var(--text-muted);
+}
+.demolition-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  overflow: hidden;
+}
+.demolition-piece {
+  position: absolute;
+  overflow: hidden;
+  pointer-events: none;
+  transform-origin: center;
+}
+.opening-shell.no-header .arrive-banner {
+  visibility: hidden;
+}

@@ -149,3 +149,5 @@ button:focus-visible {
     right: 12px;
   }
 }
+
+.entry-artifacts {right:auto;left:24px;}

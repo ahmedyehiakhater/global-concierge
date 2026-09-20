@@ -1,8 +1,10 @@
 import { createServer } from "node:http";
 import { Problem, catalog } from "./store.js";
 const cookieName = "gc_session";
-export function createApi(store) {
+export function createApi(store, { serveStatic, localOrigin } = {}) {
   return createServer(async (req, res) => {
+    if (serveStatic && !req.url.startsWith("/api/"))
+      return serveStatic(req, res);
     res.setHeader("Content-Type", "application/json; charset=utf-8");
     res.setHeader("Cache-Control", "no-store");
     res.setHeader("X-Content-Type-Options", "nosniff");
@@ -43,6 +45,7 @@ export function createApi(store) {
         "http://127.0.0.1:5173",
         "http://localhost:5173",
         "http://127.0.0.1:8787",
+        ...(localOrigin ? [localOrigin] : []),
       ]);
       if (
         (origin && !allowed.has(origin)) ||
@@ -72,14 +75,44 @@ export function createApi(store) {
         throw new Problem(400, "Expected an object.");
       const key = req.headers["idempotency-key"];
       if (
-        ["/api/bookings", "/api/session/reset"].includes(path) &&
+        [
+          "/api/bookings",
+          "/api/bookings/rehearsal",
+          "/api/session/reset",
+          "/api/bookings/amend",
+          "/api/bookings/cancel",
+        ].includes(path) &&
         (typeof key !== "string" || !/^[a-zA-Z0-9-]{8,80}$/.test(key))
       )
         throw new Problem(400, "A valid idempotency key is required.");
+      if (path === "/api/bookings/quote")
+        return send(
+          200,
+          store.previewAmend(
+            id,
+            payload.bookingId,
+            payload.version,
+            payload.payload,
+          ),
+        );
+      if (path === "/api/bookings/amend" || path === "/api/bookings/cancel")
+        return send(
+          200,
+          store.manage(
+            id,
+            key,
+            path.endsWith("/amend") ? "amend" : "cancel",
+            payload,
+          ),
+        );
       if (path === "/api/session/features")
         return send(200, store.feature(id, payload.feature));
       if (path === "/api/session/draft")
         return send(200, store.draft(id, payload));
+      if (path === "/api/session/rehearsal-draft")
+        return send(200, store.draft(id, payload, true));
+      if (path === "/api/bookings/rehearsal")
+        return send(200, store.book(id, key, payload, true));
       if (path === "/api/bookings")
         return send(200, store.book(id, key, payload));
       if (path === "/api/session/reset") {
